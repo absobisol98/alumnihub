@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ATLAS Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --c-primary:#0433FF;--c-primary-hover:#0228CC;--c-primary-tint:#EAECff;
+  --c-secondary:#FF7B00;--c-secondary-hover:#D96600;--c-secondary-tint:#FFF3E6;
+  --c-ink:#0C0D12;--c-ink-2:#2C2F3E;--c-muted:#5A5F72;--c-subtle:#8A8FA3;
+  --c-bg:#F5F5F3;--c-surface:#FFFFFF;--c-surface-2:#EDEDEA;
+  --c-border:rgba(12,13,18,.08);--c-border-2:rgba(12,13,18,.14);
+  --sp-1:8px;--sp-2:16px;--sp-3:24px;--sp-4:32px;--sp-5:40px;
+  --sp-6:48px;--sp-7:56px;--sp-8:64px;--sp-10:80px;--sp-12:96px;--sp-16:128px;
+  --r:12px;--r-sm:8px;--r-xs:4px;
+  --font:'NB International Pro','Barlow',system-ui,sans-serif;
+  --ease:.24s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);font-weight:400;font-size:16px;line-height:1.65;color:var(--c-ink);background:var(--c-bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+button{font-family:var(--font);cursor:pointer}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--c-border-2);border-radius:4px}
+:focus-visible{outline:3px solid var(--c-primary);outline-offset:3px;border-radius:var(--r-xs)}
+.skip-link{position:absolute;top:-100%;left:var(--sp-3);background:var(--c-primary);color:#fff;font-size:.88rem;font-weight:700;padding:var(--sp-1) var(--sp-3);border-radius:0 0 var(--r-sm) var(--r-sm);z-index:9999;text-decoration:none}
+.skip-link:focus{top:0}
+h1,h2,h3,h4{font-family:var(--font);font-weight:800;line-height:1.06;letter-spacing:-.032em;color:var(--c-ink)}
+.t-display{font-size:clamp(3rem,5.5vw,5rem);line-height:1.02}
+.t-h2{font-size:clamp(1.7rem,2.8vw,2.4rem)}
+.t-overline{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c-secondary)}
+.t-body{font-size:1rem;font-weight:400;line-height:1.75;color:var(--c-ink-2)}
+
+/* NAV */
+.site-header{position:sticky;top:0;z-index:500;background:rgba(245,245,243,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--c-border)}
+.nav-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);height:140px}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;border-radius:var(--r-xs)}
+.nav-logo-img{height:130px;width:auto;display:block;mix-blend-mode:multiply;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:var(--sp-1);list-style:none}
+.nav-links li a{display:inline-block;font-size:.875rem;font-weight:500;color:var(--c-muted);text-decoration:none;padding:var(--sp-1) var(--sp-2);border-radius:var(--r-xs);transition:background var(--ease),color var(--ease)}
+.nav-links li a:hover{background:var(--c-surface-2);color:var(--c-ink-2)}
+.nav-links li a.active{background:var(--c-primary-tint);color:var(--c-primary);font-weight:600}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:1px solid var(--c-border-2);border-radius:var(--r-xs);padding:0 10px;transition:border-color var(--ease)}
+.nav-toggle:hover{border-color:var(--c-primary)}
+.nav-toggle span{width:100%;height:1.5px;background:var(--c-ink);border-radius:2px;display:block}
+
+/* PAGES */
+.page{display:none}
+.page.is-active{display:block;animation:fadeUp .28s ease both}
+@keyframes fadeUp{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:#0a0d1a}
+.hero-bg{position:absolute;inset:0;background-image:url('Homecoming.jpg');background-size:cover;background-position:center;opacity:.28}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(4,51,255,.55) 0%,rgba(4,51,255,.2) 45%,rgba(0,0,0,0) 70%),linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 60%)}
+.hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;padding:var(--sp-16) var(--sp-8);display:grid;grid-template-columns:1fr 380px;gap:var(--sp-12);align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-5)}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--c-secondary);flex-shrink:0}
+.hero-eyebrow-text{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.hero h1{font-size:clamp(2.8rem,5.2vw,5rem);color:#fff;margin-bottom:var(--sp-4);font-weight:800;letter-spacing:-.04em;line-height:1.03}
+.hero h1 .accent{color:var(--c-secondary);font-style:italic}
+.hero-lead{font-size:1.05rem;color:rgba(255,255,255,.58);line-height:1.8;margin-bottom:var(--sp-7);max-width:480px}
+.hero-actions{display:flex;gap:var(--sp-2);flex-wrap:wrap;align-items:center}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:var(--font);font-weight:700;font-size:.875rem;letter-spacing:.015em;padding:14px var(--sp-4);border-radius:var(--r-sm);border:none;cursor:pointer;text-decoration:none;transition:background var(--ease),color var(--ease),transform var(--ease),box-shadow var(--ease);white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn-blue{background:var(--c-primary);color:#fff}
+.btn-blue:hover{background:var(--c-primary-hover);box-shadow:0 6px 24px rgba(4,51,255,.32)}
+.btn-orange{background:var(--c-secondary);color:#fff}
+.btn-orange:hover{background:var(--c-secondary-hover);box-shadow:0 6px 24px rgba(255,123,0,.32)}
+.btn-ghost-dark{background:transparent;color:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.2)}
+.btn-ghost-dark:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);color:#fff}
+.btn-outline{background:transparent;color:var(--c-ink-2);border:1.5px solid var(--c-border-2)}
+.btn-outline:hover{border-color:var(--c-secondary);color:var(--c-secondary);background:var(--c-secondary-tint)}
+
+/* HERO PANEL */
+.hero-panel{background:rgba(255,255,255,.96);border-radius:var(--r);border:1px solid rgba(255,255,255,.4);box-shadow:0 32px 80px rgba(0,0,0,.2);overflow:hidden;min-width:340px}
+.hero-panel-head{padding:var(--sp-3) var(--sp-5) var(--sp-2);border-bottom:1px solid var(--c-border)}
+.hero-panel-head p{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c-subtle)}
+.hp-row{display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-5);border-bottom:1px solid var(--c-border);cursor:pointer;transition:background var(--ease);text-decoration:none}
+.hp-row:last-child{border-bottom:none}
+.hp-row:hover{background:var(--c-bg)}
+.hp-icon{width:52px;height:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1.5px solid transparent;border-radius:var(--r-sm);transition:all var(--ease)}
+/* Each icon gets its own branded identity at rest */
+.hp-icon-opp{background:var(--c-primary-tint);color:var(--c-primary);border-color:rgba(4,51,255,.12)}
+.hp-icon-act{background:var(--c-secondary-tint);color:var(--c-secondary);border-color:rgba(255,123,0,.12)}
+.hp-icon-stories{background:#EEF9E8;color:#2D6E0F;border-color:rgba(45,110,15,.12)}
+/* Hover — deepen the same tint */
+.hp-row:hover .hp-icon-opp{background:var(--c-primary-tint);border-color:var(--c-primary);color:var(--c-primary)}
+.hp-row:hover .hp-icon-act{background:var(--c-secondary-tint);border-color:var(--c-secondary);color:var(--c-secondary)}
+.hp-row:hover .hp-icon-stories{background:#EEF9E8;border-color:#2D6E0F;color:#2D6E0F}
+.hp-copy{flex:1;min-width:0}
+.hp-copy strong{display:block;font-size:1rem;font-weight:700;color:var(--c-ink);margin-bottom:4px;letter-spacing:-.01em}
+.hp-copy small{font-size:.82rem;color:var(--c-muted);line-height:1.4}
+.hp-arr{color:var(--c-subtle);flex-shrink:0;transition:transform var(--ease),color var(--ease)}
+.hp-row:hover .hp-arr{transform:translateX(4px);color:var(--c-secondary)}
+
+/* METRICS */
+.metrics-band{background:var(--c-surface);border-bottom:1px solid var(--c-border)}
+.metrics-inner{max-width:1240px;margin:0 auto;padding:var(--sp-10) var(--sp-8);display:grid;grid-template-columns:repeat(3,1fr)}
+.metric{padding:0 var(--sp-6);border-left:1px solid var(--c-border)}
+.metric:first-child{border-left:none;padding-left:0}
+.metric-num{font-size:clamp(2.2rem,3.5vw,3rem);font-weight:800;color:var(--c-ink);letter-spacing:-.05em;line-height:1;margin-bottom:var(--sp-1)}
+.metric-num .n{color:var(--c-secondary)}
+.metric-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c-muted);margin-bottom:var(--sp-1)}
+.metric-desc{font-size:.8rem;color:var(--c-subtle);line-height:1.45}
+
+/* LAYOUT */
+.container{max-width:1240px;margin:0 auto;padding:0 var(--sp-8)}
+.section-pad{padding:var(--sp-16) 0}
+.section-hdr{margin-bottom:var(--sp-10)}
+.section-hdr .t-overline{margin-bottom:var(--sp-2)}
+.section-hdr .t-h2{margin-bottom:var(--sp-2)}
+.section-hdr .t-body{max-width:520px}
+
+/* ── HOME PREVIEW SECTIONS ── */
+.home-sections{background:var(--c-bg);padding:var(--sp-16) 0}
+.home-sections-inner{max-width:1240px;margin:0 auto;padding:0 var(--sp-8)}
+.home-block{margin-bottom:var(--sp-16)}
+.home-block:last-child{margin-bottom:0}
+.home-block-top{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--sp-4);margin-bottom:var(--sp-7);flex-wrap:wrap}
+.home-block-top h2{font-size:1.6rem;font-weight:800;color:var(--c-ink);letter-spacing:-.025em}
+.home-block-top a.view-all{font-size:.85rem;font-weight:700;color:var(--c-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:gap var(--ease)}
+.home-block-top a.view-all:hover{gap:9px}
+.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+
+/* Preview card - opportunity */
+.p-opp-card{background:var(--c-surface);border-radius:var(--r);border:1px solid var(--c-border);overflow:hidden;cursor:pointer;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+.p-opp-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(12,13,18,.09);border-color:var(--c-border-2)}
+.p-thumb{height:200px;position:relative;overflow:hidden;background:var(--c-ink);display:flex;align-items:flex-end}
+.p-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.p-opp-card:hover .p-thumb img{transform:scale(1.04)}
+.p-thumb-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,13,18,.72) 0%,rgba(12,13,18,.08) 55%)}
+.p-chip{position:relative;z-index:1;display:inline-block;margin:0 var(--sp-3) var(--sp-3);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:var(--r-xs);background:var(--c-secondary);color:#fff}
+.p-opp-body{padding:var(--sp-3) var(--sp-4) var(--sp-4)}
+.p-opp-title{font-size:1.05rem;font-weight:800;color:var(--c-ink);margin-bottom:var(--sp-1);line-height:1.25;letter-spacing:-.02em}
+.p-opp-org{font-size:.82rem;color:var(--c-subtle);font-weight:500}
+
+/* Preview card - activity (homepage) */
+.p-ev-card{
+  background:var(--c-surface);border-radius:var(--r);border:1px solid var(--c-border);
+  padding:var(--sp-5) var(--sp-5) var(--sp-4);cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:0 1px 2px rgba(12,13,18,.04),0 2px 8px rgba(12,13,18,.03);
+  transition:transform .26s cubic-bezier(.4,0,.2,1),box-shadow .26s cubic-bezier(.4,0,.2,1),border-color .26s ease;
+}
+.p-ev-card::before{
+  content:'';position:absolute;top:var(--sp-3);bottom:var(--sp-3);
+  left:0;width:2px;background:var(--c-secondary);opacity:.35;
+  border-radius:0 2px 2px 0;transition:opacity .26s ease;
+}
+.p-ev-card::after{
+  content:'→';position:absolute;bottom:var(--sp-4);right:var(--sp-3);
+  font-size:.78rem;color:var(--c-secondary);
+  opacity:0;transform:translateX(-6px);
+  transition:opacity .22s ease,transform .22s cubic-bezier(.4,0,.2,1);pointer-events:none;
+}
+.p-ev-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(12,13,18,.05),0 8px 24px rgba(12,13,18,.08),0 20px 48px rgba(12,13,18,.05);
+  border-color:var(--c-border-2);
+}
+.p-ev-card:hover::before{opacity:1}
+.p-ev-card:hover::after{opacity:1;transform:translateX(0)}
+.p-ev-date{display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin-bottom:var(--sp-3);padding-left:var(--sp-2)}
+.p-ev-day{font-size:2rem;font-weight:800;color:var(--c-ink);letter-spacing:-.05em;line-height:1;transition:color .22s ease}
+.p-ev-card:hover .p-ev-day{color:var(--c-primary)}
+.p-ev-month{font-size:.6rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--c-subtle);line-height:1}
+.p-ev-title{font-size:1rem;font-weight:700;color:var(--c-ink);margin-bottom:6px;line-height:1.28;letter-spacing:-.02em;padding-left:var(--sp-2)}
+.p-ev-desc{font-size:.84rem;color:var(--c-muted);line-height:1.68;margin-bottom:var(--sp-2);padding-left:var(--sp-2)}
+.p-chips{display:flex;gap:6px;flex-wrap:wrap;padding-left:var(--sp-2)}
+.p-chip-sm{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-xs)}
+
+/* Preview card - story */
+.p-story-card{background:var(--c-surface);border-radius:var(--r);border:1px solid var(--c-border);padding:var(--sp-5);cursor:pointer;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+.p-story-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(12,13,18,.08);border-color:var(--c-border-2)}
+.p-avatar{width:48px;height:48px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:.84rem;font-weight:800;margin-bottom:var(--sp-3)}
+.p-batch{display:none}
+.p-name{display:block;font-size:1.1rem;font-weight:800;color:var(--c-ink);letter-spacing:-.025em;margin-bottom:4px;line-height:1.2}
+.p-role{font-size:.82rem;color:var(--c-muted);margin-bottom:var(--sp-2);font-weight:400}
+.p-excerpt{font-size:.88rem;color:var(--c-ink-2);line-height:1.68}
+
+/* CHIP COLOURS */
+.chip-online{background:#E8F2FF;color:#0050A8}
+.chip-inperson{background:var(--c-secondary-tint);color:var(--c-secondary-hover)}
+.chip-type{background:var(--c-primary-tint);color:var(--c-primary)}
+.av-a{background:var(--c-primary-tint);color:var(--c-primary)}
+.av-b{background:#E8F2FF;color:#0050A8}
+.av-c{background:var(--c-secondary-tint);color:var(--c-secondary-hover)}
+.av-d{background:#EEF9E8;color:#2D6E0F}
+
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:var(--sp-5)}
+.search-input{width:100%;max-width:480px;padding:12px var(--sp-4) 12px var(--sp-5);border:1.5px solid var(--c-border-2);border-radius:var(--r-sm);font-family:var(--font);font-size:.9rem;color:var(--c-ink);background:var(--c-surface);transition:border-color var(--ease),box-shadow var(--ease);outline:none}
+.search-input:focus{border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(4,51,255,.12)}
+.search-input::placeholder{color:var(--c-subtle)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--c-subtle);pointer-events:none}
+
+/* FILTERS */
+.filter-bar{display:flex;gap:var(--sp-1);flex-wrap:wrap;margin-bottom:var(--sp-7)}
+.pill{font-size:.78rem;font-weight:600;padding:7px var(--sp-3);border-radius:30px;border:1.5px solid var(--c-border-2);background:var(--c-surface);color:var(--c-muted);cursor:pointer;font-family:var(--font);transition:all var(--ease)}
+.pill:hover{border-color:var(--c-secondary);color:var(--c-secondary)}
+.pill.is-active{background:var(--c-secondary);color:#fff;border-color:var(--c-secondary)}
+
+/* OPP CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:var(--sp-4)}
+.opp-card{background:var(--c-surface);border-radius:var(--r);border:1px solid var(--c-border);overflow:hidden;cursor:pointer;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+.opp-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(12,13,18,.09);border-color:var(--c-border-2)}
+.opp-thumb{height:220px;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:var(--c-ink)}
+.opp-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.opp-card:hover .opp-thumb img{transform:scale(1.04)}
+.opp-thumb-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,13,18,.72) 0%,rgba(12,13,18,.08) 55%)}
+.opp-chip{position:relative;z-index:1;display:inline-block;margin:0 var(--sp-3) var(--sp-3);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:var(--r-xs);background:var(--c-secondary);color:#fff}
+.opp-body{padding:var(--sp-4)}
+.opp-title{font-size:1.1rem;font-weight:800;color:var(--c-ink);margin-bottom:var(--sp-1);line-height:1.25;letter-spacing:-.025em}
+.opp-org{font-size:.82rem;color:var(--c-subtle);margin-bottom:var(--sp-2);font-weight:500}
+.opp-desc{font-size:.88rem;color:var(--c-muted);line-height:1.68}
+.opp-foot{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-2) var(--sp-4);border-top:1px solid var(--c-border)}
+.opp-deadline{font-size:.76rem;color:var(--c-subtle);font-weight:500}
+.opp-more{font-size:.82rem;font-weight:700;color:var(--c-secondary);display:flex;align-items:center;gap:4px;transition:gap var(--ease)}
+.opp-card:hover .opp-more{gap:8px}
+
+/* DETAIL VIEW */
+.detail-view{display:none}
+.detail-view.is-active{display:block;animation:fadeUp .28s ease both}
+.back-btn{display:inline-flex;align-items:center;gap:var(--sp-1);font-size:.82rem;font-weight:700;color:var(--c-muted);background:none;border:none;padding:0;margin-bottom:var(--sp-6);transition:color var(--ease)}
+.back-btn svg{transition:transform var(--ease)}
+.back-btn:hover{color:var(--c-ink)}
+.back-btn:hover svg{transform:translateX(-3px)}
+.detail-hero{width:100%;height:400px;border-radius:var(--r);overflow:hidden;margin-bottom:var(--sp-7);position:relative;background:var(--c-ink)}
+.detail-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.detail-hero-chip{position:absolute;top:var(--sp-3);left:var(--sp-3);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-xs);background:var(--c-secondary);color:#fff}
+.detail-layout{display:grid;grid-template-columns:1fr 300px;gap:var(--sp-10);align-items:start}
+.detail-title{font-size:clamp(1.7rem,2.6vw,2.4rem);font-weight:800;letter-spacing:-.032em;color:var(--c-ink);margin-bottom:var(--sp-1);line-height:1.06}
+.detail-org{font-size:.875rem;color:var(--c-muted);margin-bottom:var(--sp-5);display:flex;align-items:center;gap:6px}
+.detail-org::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--c-secondary);flex-shrink:0}
+.detail-prose p{font-size:.97rem;color:var(--c-ink-2);line-height:1.82;margin-bottom:var(--sp-2)}
+.detail-gallery{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2);margin-top:var(--sp-5)}
+.detail-gallery img{width:100%;height:176px;object-fit:cover;border-radius:var(--r-sm)}
+.info-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r);overflow:hidden;position:sticky;top:160px}
+.info-card-head{padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--c-border)}
+.info-card-head h4{font-size:.875rem;font-weight:700;color:var(--c-ink)}
+.info-row{display:flex;align-items:flex-start;gap:var(--sp-2);padding:var(--sp-2) var(--sp-4);border-bottom:1px solid var(--c-border)}
+.info-row:last-of-type{border-bottom:none}
+.info-icon{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--c-border);border-radius:var(--r-xs);background:var(--c-bg);color:var(--c-muted)}
+.info-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted);margin-bottom:3px}
+.info-val{font-size:.875rem;font-weight:600;color:var(--c-ink);line-height:1.4}
+.info-tags{display:flex;flex-wrap:wrap;gap:var(--sp-1);padding:var(--sp-2) var(--sp-4);border-top:1px solid var(--c-border)}
+.info-tag{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-xs);background:var(--c-secondary-tint);color:var(--c-secondary-hover)}
+.info-cta{display:block;width:100%;background:var(--c-secondary);color:#fff;border:none;font-family:var(--font);font-size:.875rem;font-weight:700;padding:var(--sp-2) var(--sp-4);cursor:pointer;letter-spacing:.02em;transition:background var(--ease),box-shadow var(--ease)}
+.info-cta:hover{background:var(--c-secondary-hover);box-shadow:0 6px 20px rgba(255,123,0,.25)}
+
+/* EVENTS */
+.view-toggle{display:flex;gap:var(--sp-1);margin-bottom:var(--sp-7)}
+.view-btn{font-size:.8rem;font-weight:600;padding:8px var(--sp-3);border-radius:var(--r-sm);border:1.5px solid var(--c-border-2);background:var(--c-surface);color:var(--c-muted);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px;transition:all var(--ease)}
+.view-btn.is-active,.view-btn:hover{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+/* ── EVENT CARDS (Activities page) — premium refinement ── */
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:var(--sp-4)}
+
+.ev-card{
+  background:var(--c-surface);
+  border-radius:var(--r);
+  border:1px solid var(--c-border);
+  padding:var(--sp-6) var(--sp-6) var(--sp-5);
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  /* Two-layer compound shadow at rest — subtle depth */
+  box-shadow:
+    0 1px 2px rgba(12,13,18,.04),
+    0 2px 8px rgba(12,13,18,.03);
+  transition:
+    transform .26s cubic-bezier(.4,0,.2,1),
+    box-shadow .26s cubic-bezier(.4,0,.2,1),
+    border-color .26s ease;
+}
+
+/* Persistent left rule — structural anchor at rest */
+.ev-card::before{
+  content:'';
+  position:absolute;
+  top:var(--sp-4);bottom:var(--sp-4);
+  left:0;width:2px;
+  background:var(--c-secondary);
+  opacity:.35;
+  border-radius:0 2px 2px 0;
+  transition:opacity .26s ease;
+}
+
+/* Hover — compound shadow lifts, rule brightens, border tightens */
+.ev-card:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(12,13,18,.05),
+    0 8px 24px rgba(12,13,18,.08),
+    0 20px 48px rgba(12,13,18,.05);
+  border-color:var(--c-border-2);
+}
+.ev-card:hover::before{opacity:1}
+
+/* Arrow affordance — hidden at rest, slides in on hover */
+.ev-card::after{
+  content:'→';
+  position:absolute;
+  bottom:var(--sp-5);right:var(--sp-4);
+  font-size:.82rem;
+  color:var(--c-secondary);
+  opacity:0;
+  transform:translateX(-6px);
+  transition:opacity .22s ease,transform .22s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.ev-card:hover::after{opacity:1;transform:translateX(0)}
+
+/* Date — stacked two-line editorial block */
+.ev-date{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+  margin-bottom:var(--sp-4);
+  /* Inset from left rule */
+  padding-left:var(--sp-2);
+}
+.ev-day{
+  font-size:2.6rem;
+  font-weight:800;
+  color:var(--c-ink);
+  letter-spacing:-.06em;
+  line-height:1;
+  transition:color .22s ease;
+}
+.ev-card:hover .ev-day{color:var(--c-primary)}
+.ev-month{
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--c-subtle);
+  line-height:1;
+  /* Sits flush below the day number */
+}
+
+/* Content area — consistent left inset */
+.ev-title{
+  font-size:1.08rem;
+  font-weight:700;
+  color:var(--c-ink);
+  margin-bottom:var(--sp-1);
+  line-height:1.28;
+  letter-spacing:-.02em;
+  padding-left:var(--sp-2);
+  transition:color .22s ease;
+}
+.ev-card:hover .ev-title{color:var(--c-ink)}
+
+.ev-desc{
+  font-size:.86rem;
+  color:var(--c-muted);
+  line-height:1.72;
+  margin-bottom:var(--sp-4);
+  padding-left:var(--sp-2);
+}
+
+.ev-chips{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  padding-left:var(--sp-2);
+}
+.ev-chip{
+  font-size:.63rem;
+  font-weight:700;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:var(--r-xs);
+  line-height:1;
+}
+
+/* CALENDAR */
+.cal-wrap{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r);overflow:hidden}
+.cal-head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--c-border)}
+.cal-head h3{font-size:.97rem;font-weight:700;color:var(--c-ink)}
+.cal-nav-wrap{display:flex;gap:var(--sp-1)}
+.cal-btn{width:32px;height:32px;border:1px solid var(--c-border-2);border-radius:var(--r-xs);background:var(--c-surface);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--c-muted);transition:all var(--ease)}
+.cal-btn:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.cal-days-head{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--c-border)}
+.cal-days-head span{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted);text-align:center;padding:var(--sp-2) 0}
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-cell{min-height:88px;border-right:1px solid var(--c-border);border-bottom:1px solid var(--c-border);padding:var(--sp-1)}
+.cal-cell:nth-child(7n){border-right:none}
+.cal-cell.dim .cal-num{color:var(--c-subtle)}
+.cal-cell.today{background:var(--c-primary-tint)}
+.cal-cell.today .cal-num{color:var(--c-primary);font-weight:800}
+.cal-num{font-size:.8rem;font-weight:600;color:var(--c-ink-2);margin-bottom:3px}
+.cal-ev-btn{font-size:.62rem;font-weight:700;padding:2px 5px;border-radius:2px;background:var(--c-secondary);color:#fff;margin-top:3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;cursor:pointer;border:none;width:100%;text-align:left;font-family:var(--font);transition:opacity var(--ease)}
+.cal-ev-btn:hover{opacity:.82}
+.cal-ev-btn.is-blue{background:var(--c-primary)}
+.cal-cell.has-ev{cursor:default}
+
+/* EVENT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(12,13,18,.52);z-index:800;display:flex;align-items:center;justify-content:center;padding:var(--sp-3);opacity:0;pointer-events:none;transition:opacity var(--ease)}
+.modal-overlay.is-open{opacity:1;pointer-events:all}
+.modal-box{background:var(--c-surface);border-radius:var(--r);width:100%;max-width:520px;box-shadow:0 24px 80px rgba(0,0,0,.22);transform:translateY(12px);transition:transform var(--ease);overflow:hidden}
+.modal-overlay.is-open .modal-box{transform:translateY(0)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--c-border)}
+.modal-head h3{font-size:1rem;font-weight:800;color:var(--c-ink);letter-spacing:-.02em}
+.modal-close{width:32px;height:32px;border:1px solid var(--c-border-2);border-radius:var(--r-xs);background:none;color:var(--c-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--ease)}
+.modal-close:hover{border-color:var(--c-ink);color:var(--c-ink)}
+.modal-body{padding:var(--sp-4)}
+.modal-date-badge{display:inline-flex;align-items:center;gap:6px;background:var(--c-secondary-tint);color:var(--c-secondary-hover);font-size:.78rem;font-weight:700;padding:6px 14px;border-radius:30px;margin-bottom:var(--sp-3)}
+.modal-desc{font-size:.9rem;color:var(--c-ink-2);line-height:1.75;margin-bottom:var(--sp-4)}
+.modal-meta{display:flex;flex-direction:column;gap:var(--sp-2);margin-bottom:var(--sp-4)}
+.modal-meta-row{display:flex;align-items:center;gap:var(--sp-2);font-size:.82rem;color:var(--c-muted)}
+.modal-meta-row strong{color:var(--c-ink-2);font-weight:600}
+.modal-chips{display:flex;gap:var(--sp-1);flex-wrap:wrap;margin-bottom:var(--sp-3)}
+.modal-foot{padding:var(--sp-3) var(--sp-4);border-top:1px solid var(--c-border);display:flex;gap:var(--sp-2);justify-content:flex-end}
+
+/* STORIES */
+.story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:var(--sp-4)}
+.story-card{background:var(--c-surface);border-radius:var(--r);border:1px solid var(--c-border);padding:var(--sp-6);cursor:pointer;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+.story-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(12,13,18,.08);border-color:var(--c-border-2)}
+.story-avatar{width:52px;height:52px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:.84rem;font-weight:800;margin-bottom:var(--sp-4)}
+.story-avatar-photo{overflow:hidden;background:var(--c-surface-2)}
+.story-avatar-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.story-batch{display:none}
+.story-headline{display:block;font-size:1.05rem;font-weight:800;color:var(--c-ink);letter-spacing:-.02em;margin-bottom:var(--sp-2);line-height:1.25}
+.story-byline{display:flex;align-items:center;gap:6px;margin-bottom:var(--sp-2)}
+.story-name{font-size:.8rem;font-weight:600;color:var(--c-ink-2)}
+.story-byline-sep{font-size:.8rem;color:var(--c-subtle)}
+.story-role{font-size:.8rem;color:var(--c-muted)}
+.story-excerpt{font-size:.84rem;color:var(--c-ink-2);line-height:1.65}
+.story-read{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:700;color:var(--c-secondary);margin-top:var(--sp-3);transition:gap var(--ease)}
+.story-card:hover .story-read{gap:9px}
+.story-hero{width:100%;height:400px;border-radius:var(--r);overflow:hidden;margin-bottom:var(--sp-7);position:relative;background:var(--c-ink)}
+.story-hero img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;opacity:.72}
+.story-hero-meta{position:absolute;bottom:0;left:0;right:0;padding:var(--sp-6) var(--sp-5);background:linear-gradient(to top,rgba(12,13,18,.78) 0%,transparent 100%)}
+.story-hero-name{font-size:.875rem;color:rgba(255,255,255,.65);margin-bottom:2px}
+.story-hero-headline{font-size:clamp(1.4rem,2.8vw,2rem);font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:6px;line-height:1.1}
+.story-hero-role{font-size:.875rem;color:rgba(255,255,255,.65)}
+.story-hero-batch{display:none}
+.story-prose p{font-size:.97rem;color:var(--c-ink-2);line-height:1.82;margin-bottom:var(--sp-3)}
+.story-prose blockquote{border-left:3px solid var(--c-secondary);padding-left:var(--sp-3);margin:var(--sp-5) 0;font-style:italic;color:var(--c-muted);font-size:1rem;line-height:1.72}
+.stat-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r);padding:var(--sp-4)}
+.stat-card h4{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted);margin-bottom:var(--sp-4);padding-bottom:var(--sp-2);border-bottom:1px solid var(--c-border)}
+.stat-item{margin-bottom:var(--sp-3)}
+.stat-item:last-child{margin-bottom:0}
+.stat-val{font-size:1.6rem;font-weight:800;color:var(--c-secondary);letter-spacing:-.04em;line-height:1;margin-bottom:3px}
+.stat-label{font-size:.78rem;color:var(--c-muted)}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--c-primary) 0%,var(--c-secondary) 100%);padding:var(--sp-16) var(--sp-8);text-align:center;position:relative;overflow:hidden}
+.cta-section::before{display:none}
+.cta-wrap{position:relative;z-index:1;max-width:560px;margin:0 auto}
+.cta-over{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:var(--sp-3)}
+.cta-h{font-size:clamp(1.9rem,3.6vw,3rem);font-weight:800;color:#fff;margin-bottom:var(--sp-2);line-height:1.05;letter-spacing:-.04em}
+.cta-p{color:rgba(255,255,255,.75);font-size:.97rem;line-height:1.78;margin-bottom:var(--sp-8)}
+.cta-btns{display:flex;gap:var(--sp-2);justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:rgba(245,245,243,.96);border-top:1px solid var(--c-border-2);padding:var(--sp-7) var(--sp-8);display:flex;align-items:center;justify-content:space-between;gap:var(--sp-5);flex-wrap:wrap}
+.footer-logo{display:flex;align-items:center;cursor:pointer;text-decoration:none;border-radius:var(--r-xs)}
+.footer-logo-img{height:56px;width:auto;mix-blend-mode:multiply;object-fit:contain}
+.f-links{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+.f-links a{font-size:.8rem;color:var(--c-muted);text-decoration:none;font-weight:500;transition:color var(--ease)}
+.f-links a:hover{color:var(--c-secondary)}
+.f-copy{font-size:.73rem;color:var(--c-subtle)}
+#sub-cta{display:none}
+
+/* RESPONSIVE */
+@media(max-width:1200px){
+  .card-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .ev-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .story-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+}
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-panel{display:none}
+  .detail-layout{grid-template-columns:1fr}
+  .info-card{position:static}
+  .preview-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-inner{padding:0 var(--sp-3)}
+  .nav-links{display:none}
+  .nav-links.is-open{display:flex;flex-direction:column;gap:4px;position:absolute;top:140px;left:0;right:0;background:rgba(245,245,243,.98);backdrop-filter:blur(16px);padding:var(--sp-2) var(--sp-3) var(--sp-4);border-bottom:1px solid var(--c-border);z-index:400}
+  .nav-links.is-open li a{display:block;padding:var(--sp-2)}
+  .nav-toggle{display:flex}
+  .container{padding:0 var(--sp-3)}
+  .hero-inner{padding:var(--sp-10) var(--sp-3)}
+  .section-pad{padding:var(--sp-10) 0}
+  .metrics-inner{padding:var(--sp-7) var(--sp-3);grid-template-columns:1fr 1fr;row-gap:var(--sp-5)}
+  .metric:nth-child(3){border-left:none;padding-left:0;grid-column:1/-1}
+  .cta-section{padding:var(--sp-12) var(--sp-3)}
+  footer{padding:var(--sp-6) var(--sp-3);flex-direction:column;align-items:flex-start}
+  .detail-hero{height:240px}
+  .detail-gallery{grid-template-columns:1fr}
+  .story-hero{height:280px}
+  .cal-cell{min-height:60px}
+  .cal-ev-btn{display:none}
+  .cal-cell.has-ev{background:var(--c-secondary-tint)}
+  .cal-cell.has-ev .cal-num{color:var(--c-secondary-hover);font-weight:800}
+  .preview-grid{grid-template-columns:1fr}
+  .home-sections-inner{padding:0 var(--sp-3)}
+  .card-grid,.ev-grid,.story-grid{grid-template-columns:1fr}
+}
+@media(max-width:479px){
+  .hero h1{font-size:2.5rem}
+  .metrics-inner{grid-template-columns:1fr;row-gap:var(--sp-5)}
+  .metric{border-left:none;padding-left:0;border-top:1px solid var(--c-border);padding-top:var(--sp-4)}
+  .metric:first-child{border-top:none;padding-top:0}
+  .cta-btns,.hero-actions{flex-direction:column;align-items:stretch}
+  .cta-btns .btn,.hero-actions .btn{text-align:center;justify-content:center}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM INTERACTIVITY LAYER
+   GPU-composited transitions only (opacity, transform).
+   No layout-triggering properties animated.
+   All reduced-motion overrides at bottom of this block.
+═══════════════════════════════════════════════════════════ */
+
+/* ── 1. HEADER — shrinks on scroll ─────────────────────── */
+.site-header{
+  transition:
+    height .32s cubic-bezier(.4,0,.2,1),
+    box-shadow .32s ease,
+    background .32s ease;
+}
+.site-header.is-scrolled{
+  box-shadow:0 2px 24px rgba(12,13,18,.07);
+  background:rgba(245,245,243,.99);
+}
+.site-header.is-scrolled .nav-inner{height:80px}
+.site-header.is-scrolled .nav-logo-img{height:68px}
+.nav-inner{transition:height .32s cubic-bezier(.4,0,.2,1)}
+.nav-logo-img{transition:height .32s cubic-bezier(.4,0,.2,1)}
+
+/* Nav link — animated underline indicator */
+.nav-links li a{position:relative}
+.nav-links li a::after{
+  content:'';
+  position:absolute;
+  bottom:-2px;left:50%;
+  width:0;height:2px;
+  background:var(--c-secondary);
+  border-radius:2px;
+  transition:width .24s cubic-bezier(.4,0,.2,1),left .24s cubic-bezier(.4,0,.2,1);
+}
+.nav-links li a:hover::after{width:40%;left:30%}
+.nav-links li a.active::after{width:60%;left:20%;background:var(--c-primary)}
+
+/* Hamburger — animated X transform */
+.nav-toggle.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-toggle.is-open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-toggle.is-open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-toggle span{transition:transform .22s cubic-bezier(.4,0,.2,1),opacity .22s ease}
+
+/* Mobile menu — slide down reveal */
+.nav-links.is-open{
+  animation:menuSlide .28s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes menuSlide{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── 2. BUTTONS — refined lift & press ─────────────────── */
+.btn{will-change:transform,box-shadow}
+.btn-blue:hover{transform:translateY(-2px)}
+.btn-orange:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.97)!important;box-shadow:none!important}
+
+/* CTA white button (gradient sections) */
+.btn-cta-white{
+  background:#fff;color:var(--c-primary);
+  transition:background .22s ease,transform .22s ease,box-shadow .22s ease;
+}
+.btn-cta-white:hover{
+  background:rgba(255,255,255,.9);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.15);
+}
+
+/* ── 3. SCROLL REVEAL ───────────────────────────────────── */
+/* Elements get .sr class via JS. When .sr-visible is added,
+   they transition to their natural state.                  */
+.sr{
+  opacity:0;
+  transform:translateY(20px);
+  transition:
+    opacity .56s cubic-bezier(.4,0,.2,1),
+    transform .56s cubic-bezier(.4,0,.2,1);
+}
+.sr.sr-visible{opacity:1;transform:translateY(0)}
+/* Stagger siblings */
+.sr-stagger .sr:nth-child(1){transition-delay:.0s}
+.sr-stagger .sr:nth-child(2){transition-delay:.08s}
+.sr-stagger .sr:nth-child(3){transition-delay:.16s}
+.sr-stagger .sr:nth-child(4){transition-delay:.24s}
+.sr-stagger .sr:nth-child(5){transition-delay:.32s}
+.sr-stagger .sr:nth-child(6){transition-delay:.40s}
+
+/* ── 4. CARDS — refined hover elevation ────────────────── */
+/* All card types share the same elevation system */
+.opp-card,.ev-card,.story-card,
+.p-opp-card,.p-ev-card,.p-story-card{
+  will-change:transform,box-shadow;
+  transition:
+    transform .28s cubic-bezier(.4,0,.2,1),
+    box-shadow .28s cubic-bezier(.4,0,.2,1),
+    border-color .28s ease;
+}
+/* Subtle focus ring on keyboard navigation */
+.opp-card:focus-visible,.ev-card:focus-visible,
+.story-card:focus-visible,.p-opp-card:focus-visible,
+.p-ev-card:focus-visible,.p-story-card:focus-visible{
+  outline:3px solid var(--c-primary);
+  outline-offset:2px;
+}
+
+/* ── 5. FILTER PILLS — active state transitions ─────────── */
+.pill{
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    transform .16s ease,
+    box-shadow .2s ease;
+}
+.pill:hover{transform:translateY(-1px)}
+.pill.is-active{
+  box-shadow:0 3px 12px rgba(255,123,0,.25);
+}
+
+/* ── 6. SEARCH INPUT — focus expansion ─────────────────── */
+.search-input{
+  transition:
+    border-color .24s ease,
+    box-shadow .24s ease,
+    max-width .36s cubic-bezier(.4,0,.2,1);
+}
+.search-input:focus{max-width:640px}
+
+/* ── 7. OPPORTUNITY CARD THUMB — precise zoom ──────────── */
+.opp-thumb,.p-thumb{overflow:hidden}
+.opp-thumb img,.p-thumb img{
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+
+/* ── 8. HERO PANEL ROWS — slide-right reveal ───────────── */
+.hp-row{
+  transition:
+    background .22s ease,
+    padding-left .22s cubic-bezier(.4,0,.2,1);
+}
+.hp-row:hover{padding-left:calc(var(--sp-5) + 4px)}
+
+/* ── 9. MODAL — polished entrance ──────────────────────── */
+.modal-overlay{transition:opacity .24s cubic-bezier(.4,0,.2,1)}
+.modal-box{
+  transition:
+    transform .3s cubic-bezier(.34,1.26,.64,1),
+    opacity .24s ease;
+}
+.modal-overlay:not(.is-open) .modal-box{
+  transform:translateY(16px) scale(.97);
+  opacity:0;
+}
+
+/* ── 10. PAGE TRANSITIONS — refined fade+lift ───────────── */
+.page.is-active{animation:pageReveal .36s cubic-bezier(.4,0,.2,1) both}
+@keyframes pageReveal{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── 11. BACK BUTTON ────────────────────────────────────── */
+.back-btn:hover svg{transform:translateX(-4px)}
+.back-btn svg{transition:transform .22s cubic-bezier(.4,0,.2,1)}
+
+/* ── 12. STORY READ MORE LINK ───────────────────────────── */
+.story-read,.story-card:hover .story-read{transition:gap .22s ease,color .22s ease}
+
+/* ── 13. VIEW ALL LINKS ──────────────────────────────────── */
+.home-block-top a.view-all svg{transition:transform .22s ease}
+.home-block-top a.view-all:hover svg{transform:translateX(4px)}
+
+/* ── 14. OPP MORE LINK ARROW ─────────────────────────────── */
+.opp-more svg{transition:transform .22s ease}
+.opp-card:hover .opp-more svg{transform:translateX(3px)}
+
+/* ── 15. METRIC NUMBERS — hover accent ─────────────────── */
+.metric{
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  cursor:default;
+}
+.metric:hover{transform:translateY(-3px)}
+.metric:hover .metric-num{color:var(--c-secondary)!important}
+.metric-num{transition:color .28s ease}
+
+/* ── PAGE HERO BANNERS ──────────────────────────────────── */
+.page-hero{
+  position:relative;height:320px;
+  overflow:hidden;display:flex;align-items:flex-end;
+  background:var(--c-ink);
+}
+@media(max-width:768px){.page-hero{height:220px}}
+.page-hero-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:.38;transition:transform 8s ease;
+}
+.page-hero:hover .page-hero-bg{transform:scale(1.03)}
+.page-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(12,13,18,.82) 0%,rgba(12,13,18,.3) 60%,rgba(12,13,18,.1) 100%);
+}
+.page-hero-overlay-accent{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(4,51,255,.45) 0%,transparent 55%);
+}
+.page-hero-content{
+  position:relative;z-index:2;
+  max-width:1240px;margin:0 auto;width:100%;
+  padding:0 var(--sp-8) var(--sp-8);
+}
+@media(max-width:768px){.page-hero-content{padding:0 var(--sp-3) var(--sp-5)}}
+.page-hero-over{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:var(--sp-2);display:block}
+.page-hero-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;color:#fff;letter-spacing:-.035em;line-height:1.06;margin-bottom:var(--sp-1)}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.62);font-weight:400;line-height:1.6;max-width:540px}
+
+/* ── REDUCED MOTION OVERRIDE ────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  .sr{opacity:1!important;transform:none!important;transition:none!important}
+  .btn,.pill,.opp-card,.ev-card,.story-card,
+  .p-opp-card,.p-ev-card,.p-story-card,
+  .site-header,.nav-inner,.nav-logo-img,
+  .hp-row,.modal-box,.opp-thumb img,.p-thumb img,
+  .back-btn svg,.opp-more svg,.metric{
+    transition:none!important;
+    transform:none!important;
+    animation:none!important;
+  }
+  .ev-card::after,.p-ev-card::after{opacity:1!important;transform:none!important}
+  .ev-card::before,.p-ev-card::before{opacity:1!important}
+  .nav-links.is-open{animation:none}
+  .page.is-active{animation:none}
+}
+
+/* ── PRELOADER ──────────────────────────────────────────────
+   Hidden immediately once JS runs. Uses opacity/transform
+   only — no layout-triggering properties — for GPU-composited
+   rendering with zero CLS impact.
+─────────────────────────────────────────────────────────── */
+#preloader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#F5F5F3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  /* Start visible; JS adds .pl-hiding then .pl-hidden */
+  opacity:1;
+  pointer-events:all;
+}
+#preloader.pl-hiding{
+  opacity:0;
+  transform:translateY(-8px);
+  transition:
+    opacity .55s cubic-bezier(.4,0,.2,1),
+    transform .55s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+#preloader.pl-hidden{
+  display:none;
+}
+
+/* Logo mark — fades + scales in */
+.pl-logo{
+  width:96px;
+  height:auto;
+  opacity:0;
+  transform:scale(.94);
+  transition:
+    opacity .6s cubic-bezier(.4,0,.2,1),
+    transform .6s cubic-bezier(.4,0,.2,1);
+}
+.pl-logo.pl-in{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* Wordmark — clips up from bottom (editorial reveal) */
+.pl-wordmark-wrap{
+  overflow:hidden;
+  height:2rem;
+  margin-top:10px;
+}
+.pl-wordmark{
+  font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;
+  font-size:1.45rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  color:#FF7B00;
+  transform:translateY(100%);
+  display:block;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.pl-wordmark.pl-in{
+  transform:translateY(0);
+}
+
+/* Progress line */
+.pl-bar-wrap{
+  width:64px;
+  height:1.5px;
+  background:rgba(12,13,18,.08);
+  border-radius:2px;
+  margin-top:28px;
+  overflow:hidden;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.pl-bar-wrap.pl-in{
+  opacity:1;
+}
+.pl-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--c-primary),var(--c-secondary));
+  border-radius:2px;
+  transition:width 1.1s cubic-bezier(.4,0,.6,1);
+}
+.pl-bar.pl-in{
+  width:100%;
+}
+
+/* Reduced motion — show final state instantly, skip animation */
+@media(prefers-reduced-motion:reduce){
+  .pl-logo,.pl-wordmark,.pl-bar-wrap,.pl-bar{
+    transition:none !important;
+    transform:none !important;
+    opacity:1 !important;
+    width:100% !important;
+  }
+  #preloader.pl-hiding{
+    transition:opacity .2s ease !important;
+    transform:none !important;
+  }
+}
+/* ── WELCOME MODAL ──────────────────────────────────────────
+   Appears after preloader exits. GPU-composited only.
+   Feels like a premium first impression, not a popup.
+─────────────────────────────────────────────────────────── */
+#welcome-overlay{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  z-index:9000;
+  background:rgba(12,13,18,.5);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  opacity:0;
+  transition:opacity .38s cubic-bezier(.4,0,.2,1);
+}
+#welcome-overlay.wm-visible{
+  display:flex;
+  opacity:1;
+  pointer-events:all;
+}
+#welcome-overlay.wm-hiding{
+  display:flex;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .26s cubic-bezier(.4,0,.2,1);
+}
+#welcome-overlay.wm-hidden{
+  display:none;
+}
+.wm-card{
+  position:relative;
+  background:#ffffff;
+  border-radius:20px;
+  border:1px solid rgba(12,13,18,.08);
+  box-shadow:
+    0 4px 16px rgba(12,13,18,.08),
+    0 20px 48px rgba(12,13,18,.12),
+    0 48px 96px rgba(12,13,18,.08);
+  width:100%;
+  max-width:440px;
+  padding:40px 36px 32px;
+  box-sizing:border-box;
+  opacity:0;
+  transform:scale(.95) translateY(12px);
+  transition:
+    opacity .42s cubic-bezier(.4,0,.2,1),
+    transform .42s cubic-bezier(.34,1.1,.64,1);
+}
+#welcome-overlay.wm-visible .wm-card{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+#welcome-overlay.wm-hiding .wm-card{
+  opacity:0;
+  transform:scale(.97) translateY(8px);
+  transition:
+    opacity .24s cubic-bezier(.4,0,.2,1),
+    transform .24s cubic-bezier(.4,0,.2,1);
+}
+.wm-logo{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:24px;
+}
+.wm-logo svg{
+  width:32px;height:28px;
+  flex-shrink:0;display:block;
+}
+.wm-logo-text{
+  font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;
+  font-size:1.05rem;letter-spacing:.07em;
+  color:#FF7B00;
+}
+.wm-rule{
+  width:32px;height:2px;
+  background:linear-gradient(90deg,#0433FF,#FF7B00);
+  border-radius:2px;
+  margin-bottom:20px;
+}
+.wm-headline{
+  font-size:1.55rem;font-weight:800;
+  color:#0C0D12;letter-spacing:-.035em;
+  line-height:1.12;margin-bottom:10px;
+  font-family:var(--font);
+}
+.wm-sub{
+  font-size:.9rem;color:#5A5F72;
+  line-height:1.72;margin-bottom:28px;
+  font-weight:400;
+}
+.wm-actions{
+  display:flex;flex-direction:column;gap:8px;
+}
+.wm-cta{
+  width:100%;padding:13px 24px;
+  background:linear-gradient(135deg,#0433FF 0%,#FF7B00 100%);
+  color:#fff;border:none;border-radius:8px;
+  font-family:var(--font);font-size:.9rem;font-weight:700;
+  cursor:pointer;letter-spacing:.01em;
+  transition:opacity .2s ease,transform .18s ease,box-shadow .2s ease;
+}
+.wm-cta:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 6px 20px rgba(4,51,255,.22)}
+.wm-cta:active{transform:scale(.98)}
+.wm-dismiss{
+  width:100%;padding:10px 24px;
+  background:none;border:none;
+  font-family:var(--font);font-size:.82rem;
+  color:#8A8FA3;font-weight:500;
+  cursor:pointer;transition:color .18s ease;
+}
+.wm-dismiss:hover{color:#5A5F72}
+.wm-close{
+  position:absolute;top:16px;right:16px;
+  width:30px;height:30px;border-radius:50%;
+  background:#EDEDEA;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:#8A8FA3;flex-shrink:0;
+  transition:background .18s ease,color .18s ease;
+}
+.wm-close:hover{background:rgba(12,13,18,.14);color:#0C0D12}
+@media(max-width:479px){
+  .wm-card{padding:32px 20px 24px;border-radius:16px;max-width:100%}
+  .wm-headline{font-size:1.3rem}
+}
+@media(prefers-reduced-motion:reduce){
+  #welcome-overlay,.wm-card{transition:none!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<!-- ── PRELOADER ─────────────────────────────────────────────
+     Rendered synchronously before any other content so it
+     appears instantly. JS removes it once window is loaded.
+──────────────────────────────────────────────────────────── -->
+<div id="preloader" role="status" aria-label="Loading ATLAS Hub" aria-live="polite">
+  <!-- Logo mark: orange left triangle + blue right triangle -->
+  <svg class="pl-logo" viewBox="0 0 96 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="48,2 72,44 24,44" fill="#FF7B00"/>
+    <polygon points="48,2 72,44 48,44" fill="#0433FF"/>
+  </svg>
+
+  <!-- Wordmark clips up from beneath -->
+  <div class="pl-wordmark-wrap" aria-hidden="true">
+    <span class="pl-wordmark">ATLAS</span>
+  </div>
+
+  <!-- Thin branded progress line -->
+  <div class="pl-bar-wrap" aria-hidden="true">
+    <div class="pl-bar"></div>
+  </div>
+</div>
+
+<!-- ── WELCOME MODAL ──────────────────────────────────────────
+     Shown once after the preloader exits. Warm first impression.
+     aria-modal + focus trap for accessibility.
+──────────────────────────────────────────────────────────── -->
+<div id="welcome-overlay" role="dialog" aria-modal="true"
+     aria-labelledby="wm-headline-id" aria-describedby="wm-sub-id"
+     aria-hidden="true">
+  <div class="wm-card" id="wmCard">
+
+    <button class="wm-close" id="wmClose" aria-label="Close welcome message">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M2 2l8 8M10 2L2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Brand mark -->
+    <div class="wm-logo" aria-hidden="true">
+      <svg width="32" height="28" viewBox="0 0 96 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="48,2 72,44 24,44" fill="#FF7B00"/>
+        <polygon points="48,2 72,44 48,44" fill="#0433FF"/>
+      </svg>
+      <span class="wm-logo-text">ATLAS</span>
+    </div>
+
+    <div class="wm-rule" aria-hidden="true"></div>
+
+    <h2 class="wm-headline" id="wm-headline-id">
+      Welcome to<br>the ATLAS Hub.
+    </h2>
+    <p class="wm-sub" id="wm-sub-id">
+      Discover opportunities for leadership and professional growth, access learning and enrichment resources, and stay engaged with the ATLAS community.
+    </p>
+
+    <div class="wm-actions">
+      <button class="wm-cta" id="wmCta">Explore the Hub</button>
+      <button class="wm-dismiss" id="wmDismiss">Maybe later</button>
+    </div>
+
+  </div>
+</div>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- ── EVENT MODAL ───────────────────────────────────────── -->
+<div class="modal-overlay" id="evModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle"></h3>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-date-badge" id="modalDate"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-chips" id="modalChips"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Close</button>
+      <a id="modalVisitLink" href="#" target="_blank" rel="noopener noreferrer"
+         class="btn btn-orange" aria-label="Visit event page — opens in new tab">
+        Visit Link
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── HEADER ────────────────────────────────────────────── -->
+<header class="site-header" role="banner">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a class="nav-logo" href="#" onclick="showPage('home');return false" aria-label="ATLAS — homepage">
+      <img src="2026 Updated ATLAS LOGO.png" alt="ATLAS" class="nav-logo-img"/>
+    </a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#" data-page="home" class="active" onclick="showPage('home');return false" aria-current="page">Home</a></li>
+      <li><a href="#" data-page="opportunities" onclick="showPage('opportunities');return false">Opportunities</a></li>
+      <li><a href="#" data-page="events" onclick="showPage('events');return false">Activities</a></li>
+      <li><a href="#" data-page="stories" onclick="showPage('stories');return false">Alumni Stories</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="main-content">
+
+<!-- ═══ HOME ═════════════════════════════════════════════ -->
+<div class="page is-active" id="page-home" role="region" aria-label="Home">
+  <section class="hero" aria-label="Welcome">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow" aria-hidden="true">
+          <span class="hero-eyebrow-line"></span>
+          <span class="hero-eyebrow-text">ATLAS Alumni Network</span>
+        </div>
+        <h1 class="t-display">Where steward<br>leaders <em class="accent">grow.</em></h1>
+        <p class="hero-lead">Learn more about fellow alumni, discover opportunities for leadership and professional growth, access learning and enrichment resources, and stay engaged with the ATLAS community. Whether you're exploring new pathways, seeking collaborations, or looking to give back, ATLAS Hub is designed to support your continued journey as a steward leader.</p>
+        <div class="hero-actions">
+          <button class="btn btn-blue" onclick="showPage('opportunities')">Explore Opportunities</button>
+          <button class="btn btn-ghost-dark" onclick="showPage('stories')">Alumni Stories</button>
+        </div>
+      </div>
+      <nav class="hero-panel" aria-label="Quick navigation">
+        <div class="hero-panel-head"><p>Navigate to</p></div>
+        <a href="#" class="hp-row" onclick="showPage('opportunities');return false" aria-label="Opportunities">
+          <div class="hp-icon hp-icon-opp" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><rect x="2" y="6" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg></div>
+          <div class="hp-copy"><strong>Opportunities</strong><small>Scholarships, fellowships &amp; programs</small></div>
+          <span class="hp-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a href="#" class="hp-row" onclick="showPage('events');return false" aria-label="Activities">
+          <div class="hp-icon hp-icon-act" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 2v2M11 2v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="2" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1.3"/></svg></div>
+          <div class="hp-copy"><strong>Activities</strong><small>Sessions, summits &amp; gatherings</small></div>
+          <span class="hp-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a href="#" class="hp-row" onclick="showPage('stories');return false" aria-label="Stories">
+          <div class="hp-icon hp-icon-stories" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6l-3 2V3a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
+          <div class="hp-copy"><strong>Alumni Stories</strong><small>Meet graduates making an impact</small></div>
+          <span class="hp-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="metrics-band" aria-label="Network at a glance">
+    <div class="metrics-inner" role="list">
+      <div class="metric" role="listitem">
+        <p class="metric-num" style="color:var(--c-secondary)" aria-label="4,000 plus alumni">
+          <span class="count-up" data-target="4000" data-suffix="+">4,000+</span>
+        </p>
+        <p class="metric-label">Alumni</p>
+        <p class="metric-desc">Across the Philippines and Southeast Asia</p>
+      </div>
+      <div class="metric" role="listitem">
+        <p class="metric-num" aria-label="48 opportunities">
+          <span class="n count-up" data-target="48">48</span>
+        </p>
+        <p class="metric-label">Opportunities</p>
+        <p class="metric-desc">Active scholarships, fellowships &amp; programs</p>
+      </div>
+      <div class="metric" role="listitem">
+        <p class="metric-num" aria-label="12 activities">
+          <span class="n count-up" data-target="12">12</span>
+        </p>
+        <p class="metric-label">Activities This Month</p>
+        <p class="metric-desc">Online and in-person gatherings scheduled</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOME PREVIEW SECTIONS -->
+  <section class="home-sections" aria-label="Latest content">
+    <div class="home-sections-inner">
+
+      <div class="home-block">
+        <div class="home-block-top">
+          <div><p class="t-overline" style="margin-bottom:6px">Latest</p><h2>Opportunities</h2></div>
+          <a href="#" class="view-all" onclick="showPage('opportunities');return false">View all <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="preview-grid" role="list">
+          <article class="p-opp-card" role="listitem" tabindex="0" onclick="openOpp('schwarzman')" aria-label="Schwarzman Scholars">
+            <div class="p-thumb"><img src="Schwarzman.png" alt="" loading="lazy"/><div class="p-thumb-ov"></div><span class="p-chip">Scholarship</span></div>
+            <div class="p-opp-body"><p class="p-opp-title">Schwarzman Scholars</p><p class="p-opp-org">Tsinghua University · Beijing</p></div>
+          </article>
+          
+          
+        </div>
+      </div>
+
+      <div class="home-block">
+        <div class="home-block-top">
+          <div><p class="t-overline" style="margin-bottom:6px">Latest</p><h2>Activities</h2></div>
+          <a href="#" class="view-all" onclick="showPage('events');return false">View all <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="preview-grid" role="list">
+          <article class="p-ev-card" role="listitem" tabindex="0" onclick="openModal('summit')" aria-label="View Annual Alumni Summit details">
+            <div class="p-ev-date"><span class="p-ev-day">20</span><span class="p-ev-month">Jun 2025</span></div>
+            <p class="p-ev-title">Annual Alumni Summit</p>
+            <p class="p-ev-desc">Flagship gathering — keynotes, working sessions, and community dialogue.</p>
+            <div class="p-chips"><span class="p-chip-sm chip-inperson">In-Person</span><span class="p-chip-sm chip-type">Leadership</span></div>
+          </article>
+          <article class="p-ev-card" role="listitem" tabindex="0" onclick="openModal('masterclass')" aria-label="View Masterclass details">
+            <div class="p-ev-date"><span class="p-ev-day">08</span><span class="p-ev-month">Jul 2025</span></div>
+            <p class="p-ev-title">Masterclass: Adaptive Leadership</p>
+            <p class="p-ev-desc">Practitioner-led session on leading through ambiguity and change.</p>
+            <div class="p-chips"><span class="p-chip-sm chip-online">Online</span><span class="p-chip-sm chip-type">Masterclass</span></div>
+          </article>
+          
+        </div>
+      </div>
+
+      <div class="home-block">
+        <div class="home-block-top">
+          <div><p class="t-overline" style="margin-bottom:6px">Latest</p><h2>Alumni Stories</h2></div>
+          <a href="#" class="view-all" onclick="showPage('stories');return false">View all <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="preview-grid" role="list">
+          <article class="p-story-card" role="listitem" tabindex="0" onclick="openStory('emmanuel')" aria-label="ATLAS Alum Emmanuel Mirus Ponon Named to Forbes 30 Under 30 Asia 2026">
+            <div class="p-avatar story-avatar-photo" style="width:48px;height:48px;border-radius:var(--r-sm);overflow:hidden;margin-bottom:var(--sp-2)"><img src="ayl2021.jpg" alt="Emmanuel Mirus Ponon" style="width:100%;height:100%;object-fit:cover;display:block"/></div>
+            <p class="p-batch">Batch 2021</p>
+            <span class="p-name">ATLAS Alum Emmanuel Mirus Ponon Named to Forbes 30 Under 30 Asia 2026</span>
+            <p class="p-role">Director of Community Partnerships &bull; Nonprofit</p>
+            <p class="p-excerpt">Mirus is the founder of AYAN, reaching over 350,000 young people across 10 Southeast Asian countries through leadership programs and regional dialogues.</p>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="home-cta-h">
+    <div class="cta-wrap">
+      <p class="cta-over">Join the Network</p>
+      <h2 class="cta-h" id="home-cta-h">Your next chapter starts here.</h2>
+      <p class="cta-p">ATLAS Hub brings together alumni committed to leadership and community impact. Access opportunities, connect with peers, and advance shared prosperity.</p>
+      <div class="cta-btns">
+        <button class="btn btn-ghost-dark" onclick="showPage('opportunities')">Browse Opportunities</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ═══ OPPORTUNITIES ════════════════════════════════════ -->
+<div class="page" id="page-opportunities" role="region" aria-label="Opportunities">
+
+  <!-- Page hero banner -->
+  <div class="page-hero" aria-hidden="true">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-overlay-accent"></div>
+    <div class="page-hero-content">
+      <span class="page-hero-over">Browse</span>
+      <h1 class="page-hero-title">Opportunities</h1>
+      <p class="page-hero-sub">Curated scholarships, fellowships, and programs selected for ATLAS alumni.</p>
+    </div>
+  </div>
+
+  <div id="opp-list">
+    <div class="container">
+      <div class="section-pad" style="padding-top:var(--sp-8)">
+
+        <div class="search-wrap" role="search">
+          <span class="search-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <input class="search-input" type="search" id="oppSearch" placeholder="Search by title, type, or organisation…" aria-label="Search opportunities" oninput="searchOpp(this.value)"/>
+        </div>
+
+        <div class="filter-bar" role="group" aria-label="Filter by type">
+          <button class="pill is-active" onclick="filterOpp(this,'all')">All</button>
+          <button class="pill" onclick="filterOpp(this,'scholarship')">Scholarships</button>
+          <button class="pill" onclick="filterOpp(this,'internship')">Internships</button>
+          <button class="pill" onclick="filterOpp(this,'fellowship')">Fellowships</button>
+          <button class="pill" onclick="filterOpp(this,'grant')">Grants</button>
+        </div>
+
+        <div class="card-grid" id="oppGrid" role="list">
+
+          <article class="opp-card" data-cat="scholarship" data-search="schwarzman scholars tsinghua university beijing scholarship" onclick="openOpp('schwarzman')" role="listitem" tabindex="0" aria-label="Schwarzman Scholars">
+            <div class="opp-thumb" aria-hidden="true"><img src="Schwarzman.png" alt="" loading="lazy"/><div class="opp-thumb-ov"></div><span class="opp-chip">Scholarships</span></div>
+            <div class="opp-body">
+              <p class="opp-title">Schwarzman Scholars</p>
+              <p class="opp-org">Tsinghua University · Beijing, China</p>
+              <p class="opp-desc">A fully-funded master's program developing the next generation of global leaders.</p>
+            </div>
+            <div class="opp-foot"><span class="opp-deadline">Deadline: Sep 9, 2026</span><span class="opp-more">View <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="opp-card" data-cat="fellowship" data-search="adenauer young leaders program konrad stiftung southeast asia fellowship" onclick="openOpp('adenauer')" role="listitem" tabindex="0" aria-label="Adenauer Young Leaders Program">
+            <div class="opp-thumb" aria-hidden="true"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=700&q=75&auto=format&fit=crop" alt="" loading="lazy"/><div class="opp-thumb-ov"></div><span class="opp-chip">Fellowships</span></div>
+            <div class="opp-body">
+              <p class="opp-title">Adenauer Young Leaders Program</p>
+              <p class="opp-org">Konrad Adenauer Stiftung</p>
+              <p class="opp-desc">Structured program for emerging Southeast Asian leaders focused on governance and regional cooperation.</p>
+            </div>
+            <div class="opp-foot"><span class="opp-deadline">Deadline: Mar 15, 2026</span><span class="opp-more">View <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="opp-detail" class="detail-view" aria-live="polite">
+    <div class="container"><div class="section-pad" style="padding-top:var(--sp-8)">
+      <button class="back-btn" onclick="closeOpp()" aria-label="Back to Opportunities">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to Opportunities
+      </button>
+      <figure class="detail-hero"><img id="d-img" src="" alt=""/><span id="d-chip" class="detail-hero-chip"></span></figure>
+      <div class="detail-layout">
+        <div>
+          <h2 class="detail-title" id="d-title"></h2>
+          <p class="detail-org" id="d-org"></p>
+          <div class="detail-prose" id="d-body"></div>
+          <div class="detail-gallery" id="d-gallery" aria-hidden="true"></div>
+        </div>
+        <aside aria-label="Program details">
+          <div class="info-card">
+            <div class="info-card-head"><h4>Program Details</h4></div>
+            <div class="info-row"><div class="info-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="1" y1="5.5" x2="13" y2="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div><div><p class="info-label">Deadline</p><p class="info-val" id="d-deadline"></p></div></div>
+            <div class="info-row"><div class="info-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><div><p class="info-label">Duration</p><p class="info-val" id="d-duration"></p></div></div>
+            <div class="info-row"><div class="info-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 7.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="1.2"/><path d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.2"/></svg></div><div><p class="info-label">Location</p><p class="info-val" id="d-location"></p></div></div>
+            <div class="info-row"><div class="info-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="4" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 4V3a2.5 2.5 0 0 1 5 0v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><div><p class="info-label">Funding</p><p class="info-val" id="d-funding"></p></div></div>
+            <div class="info-tags" id="d-tags"></div>
+            <button class="info-cta" onclick="applyNow()" aria-label="Apply — opens in new tab">Apply Now</button>
+          </div>
+        </aside>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+
+<!-- ═══ ACTIVITIES ════════════════════════════════════════ -->
+<div class="page" id="page-events" style="background:var(--c-surface-2)" role="region" aria-label="Activities">
+
+  <!-- Page hero banner -->
+  <div class="page-hero" aria-hidden="true">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-overlay-accent"></div>
+    <div class="page-hero-content">
+      <span class="page-hero-over">Calendar</span>
+      <h1 class="page-hero-title">Activities</h1>
+      <p class="page-hero-sub">Sessions, forums, and gatherings for ATLAS alumni — online and in person.</p>
+    </div>
+  </div>
+
+  <div class="container"><div class="section-pad" style="padding-top:var(--sp-8)">
+    <div class="view-toggle" role="group" aria-label="Switch view">
+      <button class="view-btn is-active" id="btn-list" onclick="setEvView('list')" aria-pressed="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><line x1="2" y1="3.5" x2="12" y2="3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="2" y1="7" x2="12" y2="7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="2" y1="10.5" x2="8" y2="10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>List
+      </button>
+      <button class="view-btn" id="btn-cal" onclick="setEvView('calendar')" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="1" y1="5.5" x2="13" y2="5.5" stroke="currentColor" stroke-width="1.4"/></svg>Calendar
+      </button>
+    </div>
+
+    <div id="ev-list">
+      <div class="ev-grid" role="list">
+        <article class="ev-card" role="listitem" tabindex="0" onclick="openModal('summit')" aria-label="Annual Alumni Summit"><div class="ev-date"><span class="ev-day">20</span><span class="ev-month">Jun 2025</span></div><h3 class="ev-title">Annual Alumni Summit</h3><p class="ev-desc">The flagship gathering of the ATLAS network — keynotes, working sessions, and community dialogue across batches.</p><div class="ev-chips"><span class="ev-chip chip-inperson">In-Person</span><span class="ev-chip chip-type">Leadership</span></div></article>
+        <article class="ev-card" role="listitem" tabindex="0" onclick="openModal('masterclass')" aria-label="Masterclass: Adaptive Leadership"><div class="ev-date"><span class="ev-day">08</span><span class="ev-month">Jul 2025</span></div><h3 class="ev-title">Masterclass: Adaptive Leadership</h3><p class="ev-desc">A practitioner-led session on leading through ambiguity, drawing from case studies in governance and organizational change.</p><div class="ev-chips"><span class="ev-chip chip-online">Online</span><span class="ev-chip chip-type">Masterclass</span></div></article>
+        
+        
+        
+        
+      </div>
+    </div>
+
+    <div id="ev-cal" style="display:none" role="region" aria-label="Monthly calendar view">
+      <div class="cal-wrap">
+        <div class="cal-head">
+          <h3 id="cal-label"></h3>
+          <div class="cal-nav-wrap">
+            <button class="cal-btn" onclick="calMove(-1)" aria-label="Previous month"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="cal-btn" onclick="calMove(1)" aria-label="Next month"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <div class="cal-days-head"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="cal-body" id="calGrid" role="grid"></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+
+<!-- ═══ STORIES ═══════════════════════════════════════════ -->
+<div class="page" id="page-stories" role="region" aria-label="Alumni Stories">
+
+  <!-- Page hero banner -->
+  <div class="page-hero" aria-hidden="true">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-overlay-accent"></div>
+    <div class="page-hero-content">
+      <span class="page-hero-over">Alumni Stories</span>
+      <h1 class="page-hero-title">Alumni Stories</h1>
+      <p class="page-hero-sub">Meet graduates making an impact across industries and communities.</p>
+    </div>
+  </div>
+
+  <div id="story-list">
+    <div class="container"><div class="section-pad" style="padding-top:var(--sp-8)">
+      <div class="story-grid" role="list">
+        <article class="story-card" onclick="openStory('emmanuel')" role="listitem" tabindex="0" aria-label="ATLAS Alum Emmanuel Mirus Ponon Named to Forbes 30 Under 30 Asia 2026"><div class="story-avatar story-avatar-photo" aria-hidden="true"><img src="ayl2021.jpg" alt="Emmanuel Mirus Ponon"/></div><p class="story-batch">Batch 2021</p><span class="story-headline">ATLAS Alum Emmanuel Mirus Ponon Named to Forbes 30 Under 30 Asia 2026</span><div class="story-byline"><span class="story-name">Emmanuel Mirus Ponon</span><span class="story-byline-sep">&middot;</span><span class="story-role">AYL - ATLAS 2021</span></div><p class="story-excerpt">Mirus is the founder of the ASEAN Youth Advocates Network (AYAN), reaching over 350,000 young people across 10 Southeast Asian countries through leadership programs, advocacy campaigns, and regional dialogues.</p><span class="story-read" aria-hidden="true">Read full story <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3 3.5-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></article>
+        
+        
+        
+        
+        
+        
+      </div>
+    </div></div>
+  </div>
+
+  <div id="story-detail" class="detail-view" aria-live="polite">
+    <div class="container"><div class="section-pad" style="padding-top:var(--sp-8)">
+      <button class="back-btn" onclick="closeStory()" aria-label="Back to Stories">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to Stories
+      </button>
+      <figure class="story-hero"><img id="s-img" src="" alt=""/><figcaption class="story-hero-meta"><p class="story-hero-batch" id="s-batch"></p><h2 class="story-hero-headline" id="s-headline"></h2><p class="story-hero-name" id="s-name"></p><p class="story-hero-role" id="s-role"></p></figcaption></figure>
+      <div class="detail-layout">
+        <div class="story-prose" id="s-body"></div>
+        <aside aria-label="Impact statistics"><div class="stat-card"><h4>Impact Highlights</h4><div id="s-stats"></div></div></aside>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+</main>
+
+<div id="sub-cta">
+  <section class="cta-section" aria-labelledby="sub-cta-h">
+    <div class="cta-wrap">
+      <p class="cta-over">Join the Network</p>
+      <h2 class="cta-h" id="sub-cta-h">Your next chapter starts here.</h2>
+      <p class="cta-p">ATLAS Hub connects alumni with opportunities, peers, and resources to deepen their impact.</p>
+      <div class="cta-btns"><button class="btn btn-ghost-dark" onclick="showPage('home')">Return to Home</button></div>
+    </div>
+  </section>
+</div>
+
+<footer role="contentinfo">
+  <a class="footer-logo" href="#" onclick="showPage('home');return false" aria-label="ATLAS — homepage">
+    <img src="2026 Updated ATLAS LOGO.png" alt="ATLAS" class="footer-logo-img"/>
+  </a>
+  <nav class="f-links" aria-label="Footer navigation">
+    <a href="#" onclick="showPage('opportunities');return false">Opportunities</a>
+    <a href="#" onclick="showPage('events');return false">Activities</a>
+    <a href="#" onclick="showPage('stories');return false">Alumni Stories</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact</a>
+  </nav>
+  <p class="f-copy">&copy; 2026 ATLAS Hub. All rights reserved.</p>
+</footer>
+
+<script>
+var OPPS={
+  schwarzman:{title:'Schwarzman Scholars',org:'Tsinghua University \u00b7 Beijing, China',type:'Scholarships',deadline:'September 9, 2026',duration:'One academic year (12 months)',location:'Beijing, China',funding:'Fully funded \u2014 tuition, room, board, flights, stipend',applyUrl:'https://www.schwarzmanscholars.org/admissions/',tags:['Global Leadership','Fully Funded','Postgraduate'],heroImg:'Schwarzman.png',gallery:['https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=75&auto=format&fit=crop'],body:'<p>Schwarzman Scholars is a fully-funded, one-year master\u2019s degree and leadership program at Tsinghua University in Beijing, China. At the heart of the program are world-renowned advisers, a rigorous and innovative study of global affairs, and hands-on exploration of Chinese culture and commerce.</p><p>The program develops the next generation of global leaders who will build trust and understanding between China and the rest of the world. Fellows are selected based on leadership potential, academic distinction, and the capacity to serve as a bridge between cultures and institutions.</p>'},
+  adenauer:{title:'Adenauer Young Leaders Program',org:'Konrad Adenauer Stiftung',type:'Fellowships',deadline:'March 15, 2026',duration:'10-month structured program',location:'Germany and Southeast Asia',funding:'Fully covered \u2014 travel, accommodation, and program costs',applyUrl:'https://www.kas.de',tags:['Southeast Asia','Governance','Civil Society'],heroImg:'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=75&auto=format&fit=crop'],body:'<p>The Adenauer Young Leaders Program is a structured fellowship for emerging public leaders in Southeast Asia. Organized by the Konrad Adenauer Stiftung, the program brings together 25\u201330 participants for a rigorous, 10-month journey spanning workshops, study tours, and mentorship sessions.</p><p>Participants engage with senior practitioners in governance, civil society, and private sector leadership, with particular focus on democratic governance, rule of law, and sustainable development within the ASEAN context.</p>'},
+  obama:{title:'Obama Foundation Fellowship',org:'Obama Foundation',type:'Fellowships',deadline:'January 31, 2026',duration:'Two-year fellowship',location:'Chicago, USA and home community',funding:'Stipend, travel, and project support provided',applyUrl:'https://www.obama.org/fellowship/',tags:['Civic Leadership','Community Change','Asia-Pacific'],heroImg:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=75&auto=format&fit=crop'],body:'<p>The Obama Foundation Fellowship is a two-year civic leadership program supporting outstanding emerging leaders working to create change in their communities. Fellows are selected based on a track record of community impact, personal character, and the potential to scale their work.</p><p>The program includes convenings in Chicago and internationally, one-on-one coaching, access to the broader Obama Foundation network, and a community project grant to support ongoing work.</p>'},
+  asia:{title:'Asia Foundation Development Grant',org:'The Asia Foundation',type:'Grants',deadline:'Rolling \u2014 reviewed quarterly',duration:'Project-based, 6\u201318 months',location:'Philippines and Asia-Pacific',funding:'Project grant \u2014 amount varies by scope',applyUrl:'https://asiafoundation.org',tags:['Community Development','Governance','Education'],heroImg:'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=600&q=75&auto=format&fit=crop'],body:'<p>The Asia Foundation Development Grant supports alumni-led projects addressing governance, education, livelihoods, and social development across the Philippines and broader Asia-Pacific region. Applications are reviewed quarterly by a panel of program officers and independent advisers.</p><p>Priority is given to projects with demonstrated community partnerships, a clear theory of change, and a realistic plan for sustainability beyond the grant period.</p>'},
+  chevening:{title:'Chevening Scholarships',org:'UK Foreign Commonwealth & Development Office',type:'Scholarships',deadline:'November 4, 2025',duration:'One year \u2014 Master\u2019s degree',location:'United Kingdom',funding:'Fully funded \u2014 tuition, living allowance, return flights',applyUrl:'https://www.chevening.org/apply/',tags:['UK Government','Postgraduate','Networking'],heroImg:'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=600&q=75&auto=format&fit=crop'],body:'<p>Chevening Scholarships are awarded by the UK Government to outstanding emerging leaders from around the world. The scholarship funds a one-year Master\u2019s degree at any eligible UK university, fully covering tuition fees, living costs, return economy flights, and additional allowances.</p><p>Chevening selects scholars who demonstrate leadership potential and a commitment to return to their home countries to contribute to national development.</p>'},
+  asean:{title:'ASEAN Secretariat Internship Program',org:'ASEAN Secretariat',type:'Internships',deadline:'April 30, 2026',duration:'Six-month placement',location:'Jakarta, Indonesia',funding:'Monthly allowance provided',applyUrl:'https://asean.org',tags:['Regional Policy','Multilateral','ASEAN'],heroImg:'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=75&auto=format&fit=crop'],body:'<p>The ASEAN Secretariat Internship Program places emerging professionals within the ASEAN Secretariat for a six-month period, contributing to policy research, coordination, and administrative work across the Secretariat\u2019s divisions.</p><p>Interns gain firsthand exposure to multilateral diplomacy, regional institution-building, and the practical realities of ASEAN cooperation.</p>'}
+};
+
+var EVENTS={
+  summit:{title:'Annual Alumni Summit',date:'June 20, 2025',time:'8:00 AM \u2013 6:00 PM',location:'Manila, Philippines',format:'In-Person',desc:'The flagship gathering of the ATLAS network \u2014 featuring keynotes, working group sessions, and community dialogue across all batches. This full-day summit brings together alumni from across the Philippines and the region to share impact stories, build connections, and co-create the next chapter of the network.',chips:['In-Person','Leadership'],url:'#'},
+  masterclass:{title:'Masterclass: Adaptive Leadership',date:'July 8, 2025',time:'2:00 PM \u2013 4:30 PM',location:'Online (Zoom)',format:'Online',desc:'A practitioner-led session on leading through ambiguity \u2014 drawing from real case studies in governance and organizational change. Led by senior ATLAS faculty and alumni practitioners from across sectors.',chips:['Online','Masterclass'],url:'#'},
+  forum:{title:'Community Impact Forum',date:'July 22, 2025',time:'9:00 AM \u2013 5:00 PM',location:'Cebu City + Online',format:'Hybrid',desc:'Alumni share lessons from community development work across Luzon, Visayas, and Mindanao, with open discussion and Q&A. A hybrid forum enabling participation from across the country.',chips:['In-Person','Also Online'],url:'#'},
+  panel:{title:'Career Pathways Panel',date:'August 5, 2025',time:'6:00 PM \u2013 8:00 PM',location:'Online (Zoom)',format:'Online',desc:'Senior alumni discuss career transitions across sectors \u2014 civil society, government, private sector, and social enterprise \u2014 and offer guidance for emerging steward leaders navigating big career decisions.',chips:['Online','Networking'],url:'#'},
+  workshop:{title:'Social Enterprise Workshop',date:'August 18, 2025',time:'9:00 AM \u2013 4:00 PM',location:'Makati City, Philippines',format:'In-Person',desc:'A structured, hands-on workshop covering venture design, impact measurement, and sustainable revenue models for social enterprises. Participants work in teams on real case challenges.',chips:['In-Person','Workshop'],url:'#'},
+  meetup:{title:'Visayas Regional Meetup',date:'September 2, 2025',time:'5:00 PM \u2013 8:00 PM',location:'Cebu City, Philippines',format:'In-Person',desc:'An informal gathering for Visayas-based alumni to reconnect, share current projects, and identify opportunities for local collaboration. Open to all alumni based in or visiting the Visayas region.',chips:['In-Person'],url:'#'}
+};
+
+var STORIES={
+  emmanuel:{headline:'ATLAS Alum Emmanuel Mirus Ponon Named to Forbes 30 Under 30 Asia 2026',name:'Emmanuel Mirus Ponon',batch:'Batch 2021',role:'Director of Community Partnerships \u2022 Nonprofit',img:'ayl2021.jpg',stats:[{v:'350,000+',l:'Young people reached'},{v:'10',l:'Southeast Asian countries'},{v:'Forbes 2026',l:'30 Under 30 Asia'}],body:'<p>The ATLAS community proudly celebrates Emmanuel Mirus Ponon (ATLAS \u2013 AYL 2021) for being named to the Forbes 30 Under 30 Asia 2026 list under the Social Impact category.</p><p>Mirus is the founder of the ASEAN Youth Advocates Network (AYAN), an organization that empowers young people across Southeast Asia to participate in policymaking, peacebuilding, and sustainable development. Through leadership programs, advocacy campaigns, and regional dialogues, AYAN has reached over 350,000 young people across 10 Southeast Asian countries, helping amplify youth voices in platforms such as ASEAN, APEC, TEDx, and the United Nations.</p><p>His recognition reflects the growing influence of young leaders who are creating meaningful impact beyond their immediate communities by building bridges across sectors, countries, and generations.</p><p>As a member of the ATLAS network, Mirus embodies the spirit of steward leadership through his commitment to empowering fellow young people and creating spaces for collaboration, dialogue, and action. His journey serves as an inspiring reminder of the power of youth leadership in shaping a more inclusive, sustainable, and interconnected future.</p><p>Congratulations, Mirus, on this remarkable achievement. The ATLAS community celebrates this milestone with you and looks forward to seeing your continued impact across the region.</p>'},
+  maria:{headline:'From Grassroots to 10,000 Farmers',name:'Maria Santos',batch:'Batch 2021',role:'Founder, Social Enterprise',img:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=80&auto=format&fit=crop',stats:[{v:'10,000+',l:'Farm households served'},{v:'3',l:'Provinces reached'},{v:'2021',l:'Year founded'}],body:'<p>When Maria Santos returned from her ATLAS experience, she brought with her a clear conviction: that the market failures affecting smallholder farmers in Eastern Visayas were solvable \u2014 but only if someone was willing to build the infrastructure no one else had.</p><blockquote>\u201cThe farmers I grew up around weren\u2019t poor because they didn\u2019t work hard. They were poor because the system wasn\u2019t built for them.\u201d</blockquote><p>Over the next three years, Maria built Bukid Connect \u2014 a cooperative digital platform that aggregates smallholder supply, connects farmers directly to institutional buyers, and provides real-time price transparency across three provinces. Today, the platform serves over 10,000 agricultural households and has helped participating farmers increase their average net income by 40% within the first two seasons of joining the cooperative.</p>'},
+  jose:{headline:'Open-Source Learning for 300 Schools',name:'Jose Reyes',batch:'Batch 2019',role:'Education Technologist',img:'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=1200&q=80&auto=format&fit=crop',stats:[{v:'300+',l:'Public schools reached'},{v:'15,000+',l:'Students supported'},{v:'Open Source',l:'License model'}],body:'<p>Jose Reyes had a simple question: why do learning materials designed for urban, Tagalog-speaking students get distributed to classrooms in Bukidnon where children speak Binukid at home?</p><p>That question became Gabay \u2014 an open-source adaptive learning system that teachers can customize for their language context, subject area, and classroom size. It has now been voluntarily deployed in over 300 public schools across Mindanao.</p><blockquote>\u201cWe didn\u2019t want to build something that required a budget line. We wanted to build something that spread because it worked.\u201d</blockquote>'},
+  ana:{headline:'Restoring 120 Hectares of Coastline',name:'Ana Cruz',batch:'Batch 2020',role:'Environmental Program Director',img:'https://images.unsplash.com/photo-1544717302-de2939b7ef71?w=1200&q=80&auto=format&fit=crop',stats:[{v:'7',l:'Provinces spanned'},{v:'500+',l:'Community volunteers'},{v:'120 ha',l:'Coastline restored'}],body:'<p>Ana Cruz began her environmental work in a single barangay in Samar. Four years later, the network she built \u2014 Dagat Natin \u2014 is the largest youth-led mangrove restoration initiative in Southeast Asia.</p><blockquote>\u201cRestoration is easy to start. Sustaining it for decades requires community ownership \u2014 not just community participation.\u201d</blockquote><p>To date, Dagat Natin chapters have restored approximately 120 hectares of coastal mangrove habitat across seven provinces, and the model is being studied by the DENR as a potential framework for national scaling.</p>'},
+  marco:{headline:'Digitising 45 Barangays from Scratch',name:'Marco Lim',batch:'Batch 2022',role:'Co-Founder, Civic Technology',img:'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80&auto=format&fit=crop',stats:[{v:'45',l:'Barangays on platform'},{v:'70%',l:'Avg. processing time reduction'},{v:'2022',l:'Company founded'}],body:'<p>Marco Lim and his co-founder launched Sentro in 2022 with a single pilot: digitizing the barangay clearance process in one municipality in Cavite. Within six months, they had reduced average processing time from four days to under four hours.</p><blockquote>\u201cLocal government technology has to serve the official first. If the captain doesn\u2019t see the value, nothing gets implemented.\u201d</blockquote><p>Sentro now operates across 45 barangays in three provinces and has processed over 80,000 transactions since launch.</p>'},
+  diane:{headline:'Mobile Clinics for Isolated Communities',name:'Diane Villanueva',batch:'Batch 2018',role:'Public Health Program Lead',img:'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80&auto=format&fit=crop',stats:[{v:'3',l:'Provinces served'},{v:'12,000+',l:'Patients seen annually'},{v:'6',l:'Mobile clinic units'}],body:'<p>When Diane Villanueva completed her ATLAS fellowship, she returned to Lanao del Norte with a specific goal: to reach communities that had never had access to a licensed health practitioner.</p><blockquote>\u201cIn some communities we serve, we are the only medical contact a family has had in years. That changes how you think about what primary healthcare should mean.\u201d</blockquote><p>Abot Kalusugan sees over 12,000 patients annually and is now partnering with PhilHealth to integrate into the formal health system.</p>'},
+  ryan:{headline:'Precision Farming, 35% Higher Yields',name:'Ryan Dela Cruz',batch:'Batch 2023',role:'Agricultural Innovation Specialist',img:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80&auto=format&fit=crop',stats:[{v:'+35%',l:'Average yield increase'},{v:'8',l:'Cooperatives partnered'},{v:'Cagayan Valley',l:'Primary region'}],body:'<p>Ryan Dela Cruz didn\u2019t come from an agricultural background. He came from soil science \u2014 and that difference turned out to matter enormously when he began working with smallholder rice and corn farmers in Cagayan Valley.</p><blockquote>\u201cWe made the data collective. Eight cooperatives share the soil monitoring system together. Each pays a fraction. Each gets full value.\u201d</blockquote><p>After two growing seasons, participating cooperatives reported an average yield increase of 35% and a 22% reduction in fertilizer input costs.</p>'}
+};
+
+var CAL_EVS=[
+  {m:5,d:20,t:'Alumni Summit',evId:'summit',blue:false},
+  {m:6,d:8,t:'Masterclass',evId:'masterclass',blue:true},
+  {m:6,d:22,t:'Impact Forum',evId:'forum',blue:false},
+  {m:7,d:5,t:'Career Panel',evId:'panel',blue:true},
+  {m:7,d:18,t:'Enterprise WS',evId:'workshop',blue:false},
+  {m:8,d:2,t:'Visayas Meetup',evId:'meetup',blue:false}
+];
+
+var PAGES=['home','opportunities','events','stories'];
+var calY=2025,calM=5,activeOppUrl='#';
+
+/* PAGE NAV */
+function showPage(id){
+  PAGES.forEach(function(p){
+    var el=document.getElementById('page-'+p);
+    el.classList.toggle('is-active',p===id);
+    if(p!==id)el.setAttribute('aria-hidden','true');
+    else el.removeAttribute('aria-hidden');
+  });
+  document.querySelectorAll('.nav-links li a').forEach(function(a){
+    var active=a.dataset.page===id;
+    a.classList.toggle('active',active);
+    if(active)a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
+  });
+  if(id!=='opportunities')resetOpp();
+  if(id!=='stories')resetStory();
+  var sub=document.getElementById('sub-cta');
+  sub.style.display=(id!=='home')?'block':'none';
+  document.getElementById('navLinks').classList.remove('is-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded','false');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleNav(){
+  var nl=document.getElementById('navLinks');
+  var btn=document.getElementById('navToggle');
+  var open=nl.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded',String(open));
+}
+
+/* OPPORTUNITIES */
+function openOpp(id){
+  var d=OPPS[id];if(!d)return;
+  // Ensure we are on the opportunities page
+  PAGES.forEach(function(p){
+    var el=document.getElementById('page-'+p);
+    el.classList.toggle('is-active',p==='opportunities');
+    if(p!=='opportunities')el.setAttribute('aria-hidden','true');
+    else el.removeAttribute('aria-hidden');
+  });
+  document.querySelectorAll('.nav-links li a').forEach(function(a){
+    var active=a.dataset.page==='opportunities';
+    a.classList.toggle('active',active);
+    if(active)a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
+  });
+  document.getElementById('sub-cta').style.display='none';
+  document.getElementById('navLinks').classList.remove('is-open');
+  // Populate detail
+  document.getElementById('d-img').src=d.heroImg;
+  document.getElementById('d-img').alt=d.title;
+  document.getElementById('d-chip').textContent=d.type;
+  document.getElementById('d-title').textContent=d.title;
+  document.getElementById('d-org').textContent=d.org;
+  document.getElementById('d-body').innerHTML=d.body;
+  document.getElementById('d-deadline').textContent=d.deadline;
+  document.getElementById('d-duration').textContent=d.duration;
+  document.getElementById('d-location').textContent=d.location;
+  document.getElementById('d-funding').textContent=d.funding;
+  document.getElementById('d-tags').innerHTML=d.tags.map(function(t){return'<span class="info-tag">'+t+'</span>';}).join('');
+  document.getElementById('d-gallery').innerHTML=d.gallery.map(function(s){return'<img src="'+s+'" alt="" loading="lazy"/>';}).join('');
+  activeOppUrl=d.applyUrl||'#';
+  document.getElementById('opp-list').hidden=true;
+  document.getElementById('opp-detail').classList.add('is-active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeOpp(){
+  document.getElementById('opp-list').hidden=false;
+  document.getElementById('opp-detail').classList.remove('is-active');
+  document.getElementById('sub-cta').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetOpp(){
+  document.getElementById('opp-list').hidden=false;
+  document.getElementById('opp-detail').classList.remove('is-active');
+}
+function applyNow(){
+  if(activeOppUrl&&activeOppUrl!=='#')window.open(activeOppUrl,'_blank','noopener,noreferrer');
+}
+function filterOpp(el,cat){
+  document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('is-active');p.setAttribute('aria-pressed','false')});
+  el.classList.add('is-active');el.setAttribute('aria-pressed','true');
+  var q=(document.getElementById('oppSearch').value||'').toLowerCase().trim();
+  document.querySelectorAll('.opp-card').forEach(function(c){
+    var catOk=cat==='all'||c.dataset.cat===cat;
+    var searchOk=!q||c.dataset.search.includes(q);
+    c.style.display=(catOk&&searchOk)?'':'none';
+  });
+}
+function searchOpp(val){
+  var q=val.toLowerCase().trim();
+  var activePill=document.querySelector('.pill.is-active');
+  var label=activePill?activePill.textContent.trim().toLowerCase():'all';
+  var catMap={'all':'all','scholarships':'scholarship','internships':'internship','fellowships':'fellowship','grants':'grant'};
+  var cat=catMap[label]||'all';
+  document.querySelectorAll('.opp-card').forEach(function(c){
+    var catOk=cat==='all'||c.dataset.cat===cat;
+    var searchOk=!q||c.dataset.search.includes(q);
+    c.style.display=(catOk&&searchOk)?'':'none';
+  });
+}
+
+/* EVENT MODAL */
+function openModal(evId){
+  var d=EVENTS[evId];if(!d)return;
+  document.getElementById('modalTitle').textContent=d.title;
+  document.getElementById('modalDate').textContent=d.date+' \u00b7 '+d.time;
+  document.getElementById('modalDesc').textContent=d.desc;
+  var locSvg='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 7.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="1.2"/><path d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.2"/></svg>';
+  var fmtSvg='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="1" y1="5.5" x2="13" y2="5.5" stroke="currentColor" stroke-width="1.2"/></svg>';
+  document.getElementById('modalMeta').innerHTML=
+    '<div class="modal-meta-row">'+locSvg+'<span><strong>Location:</strong> '+d.location+'</span></div>'+
+    '<div class="modal-meta-row">'+fmtSvg+'<span><strong>Format:</strong> '+d.format+'</span></div>';
+  var chipMap={'In-Person':'chip-inperson','Online':'chip-online','Also Online':'chip-online'};
+  document.getElementById('modalChips').innerHTML=d.chips.map(function(c){
+    return'<span class="ev-chip '+(chipMap[c]||'chip-type')+'">'+c+'</span>';
+  }).join('');
+  // Set Visit Link href from event data
+  var visitLink=document.getElementById('modalVisitLink');
+  visitLink.href=d.url||'#';
+  visitLink.setAttribute('aria-label','Visit '+d.title+' page \u2014 opens in new tab');
+  var modal=document.getElementById('evModal');
+  modal.classList.add('is-open');
+  modal.removeAttribute('aria-hidden');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){modal.querySelector('.modal-close').focus();},50);
+}
+function closeModal(){
+  var modal=document.getElementById('evModal');
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.getElementById('evModal').addEventListener('click',function(e){
+  if(e.target===this)closeModal();
+});
+
+/* STORIES */
+function openStory(id){
+  var d=STORIES[id];if(!d)return;
+  // Ensure we are on the stories page
+  PAGES.forEach(function(p){
+    var el=document.getElementById('page-'+p);
+    el.classList.toggle('is-active',p==='stories');
+    if(p!=='stories')el.setAttribute('aria-hidden','true');
+    else el.removeAttribute('aria-hidden');
+  });
+  document.querySelectorAll('.nav-links li a').forEach(function(a){
+    var active=a.dataset.page==='stories';
+    a.classList.toggle('active',active);
+    if(active)a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
+  });
+  document.getElementById('sub-cta').style.display='none';
+  document.getElementById('navLinks').classList.remove('is-open');
+  // Populate detail
+  document.getElementById('s-img').src=d.img;
+  document.getElementById('s-img').alt=d.headline+' — '+d.name;
+  document.getElementById('s-batch').textContent=d.batch;
+  document.getElementById('s-headline').textContent=d.headline;
+  document.getElementById('s-name').textContent=d.name+' · '+d.role;
+  document.getElementById('s-role').textContent='';
+  document.getElementById('s-body').innerHTML=d.body;
+  document.getElementById('s-stats').innerHTML=d.stats.map(function(s){return'<div class="stat-item"><p class="stat-val">'+s.v+'</p><p class="stat-label">'+s.l+'</p></div>';}).join('');
+  document.getElementById('story-list').hidden=true;
+  document.getElementById('story-detail').classList.add('is-active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeStory(){
+  document.getElementById('story-list').hidden=false;
+  document.getElementById('story-detail').classList.remove('is-active');
+  document.getElementById('sub-cta').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetStory(){
+  document.getElementById('story-list').hidden=false;
+  document.getElementById('story-detail').classList.remove('is-active');
+}
+
+/* EVENTS VIEW */
+function setEvView(mode){
+  var isList=mode==='list';
+  document.getElementById('ev-list').style.display=isList?'':'none';
+  document.getElementById('ev-cal').style.display=isList?'none':'';
+  document.getElementById('btn-list').classList.toggle('is-active',isList);
+  document.getElementById('btn-list').setAttribute('aria-pressed',String(isList));
+  document.getElementById('btn-cal').classList.toggle('is-active',!isList);
+  document.getElementById('btn-cal').setAttribute('aria-pressed',String(!isList));
+  if(!isList)renderCal();
+}
+
+/* CALENDAR */
+function calMove(dir){calM+=dir;if(calM>11){calM=0;calY++}if(calM<0){calM=11;calY--}renderCal()}
+function renderCal(){
+  var MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-label').textContent=MN[calM]+' '+calY;
+  var first=new Date(calY,calM,1).getDay();
+  var dim=new Date(calY,calM+1,0).getDate();
+  var prev=new Date(calY,calM,0).getDate();
+  var today=new Date();
+  var html='';
+  for(var i=first-1;i>=0;i--){html+='<div class="cal-cell dim"><p class="cal-num">'+(prev-i)+'</p></div>';}
+  for(var d=1;d<=dim;d++){
+    var isToday=today.getFullYear()===calY&&today.getMonth()===calM&&today.getDate()===d;
+    var evs=CAL_EVS.filter(function(e){return e.m===calM&&e.d===d});
+    var cls='cal-cell'+(isToday?' today':'')+(evs.length?' has-ev':'');
+    html+='<div class="'+cls+'"><p class="cal-num">'+d+'</p>';
+    evs.forEach(function(e){
+      html+='<button class="cal-ev-btn'+(e.blue?' is-blue':'')+'" onclick="openModal(\''+e.evId+'\')" aria-label="View '+e.t+' details">'+e.t+'</button>';
+    });
+    html+='</div>';
+  }
+  var total=Math.ceil((first+dim)/7)*7;
+  for(var n=1;n<=total-(first+dim);n++){html+='<div class="cal-cell dim"><p class="cal-num">'+n+'</p></div>';}
+  document.getElementById('calGrid').innerHTML=html;
+}
+
+/* KEYBOARD */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&document.getElementById('evModal').classList.contains('is-open')){closeModal();return}
+  if(e.key==='Enter'||e.key===' '){
+    var t=e.target;
+    if(t.classList.contains('opp-card')||t.classList.contains('story-card')||
+       t.classList.contains('ev-card')||t.classList.contains('p-opp-card')||
+       t.classList.contains('p-ev-card')||t.classList.contains('p-story-card')){
+      e.preventDefault();t.click();
+    }
+  }
+});
+
+/* INIT */
+(function(){
+  document.getElementById('sub-cta').style.display='none';
+  document.getElementById('evModal').setAttribute('aria-hidden','true');
+  PAGES.forEach(function(p){if(p!=='home')document.getElementById('page-'+p).setAttribute('aria-hidden','true')});
+  document.querySelectorAll('.pill').forEach(function(p){p.setAttribute('aria-pressed',p.classList.contains('is-active')?'true':'false')});
+})();
+
+/* ── COUNT-UP ANIMATION ─────────────────────────────────
+   Triggers when the metrics band scrolls into view.
+   Uses IntersectionObserver — no library needed.
+   Respects prefers-reduced-motion for accessibility.       */
+(function(){
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animateCount(el){
+    var target = parseInt(el.dataset.target, 10);
+    var suffix = el.dataset.suffix || '';
+    var duration = 1800; // ms
+    var start = null;
+    var startVal = 0;
+
+    if(prefersReduced){
+      // Skip animation — just format and show the final value
+      el.textContent = target >= 1000
+        ? (target/1000).toFixed(1).replace(/\.0$/,'') + ',000' + suffix
+        : target + suffix;
+      return;
+    }
+
+    function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+
+    function step(ts){
+      if(!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var current = Math.floor(easeOut(progress) * (target - startVal) + startVal);
+
+      // Format with comma for thousands
+      el.textContent = current >= 1000
+        ? Math.floor(current/1000).toLocaleString() + ',' + String(current % 1000).padStart(3,'0') + suffix
+        : current + suffix;
+
+      if(progress < 1) requestAnimationFrame(step);
+      else {
+        // Ensure final value is exact and formatted
+        el.textContent = target >= 1000
+          ? Math.floor(target/1000).toLocaleString() + ',' + String(target % 1000).padStart(3,'0') + suffix
+          : target + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  var counters = document.querySelectorAll('.count-up');
+  if(!counters.length) return;
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting && !entry.target.dataset.animated){
+        entry.target.dataset.animated = '1';
+        animateCount(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  counters.forEach(function(el){ observer.observe(el); });
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM INTERACTIVITY — vanilla JS
+   Respects prefers-reduced-motion throughout.
+   No external libraries. GPU-composited only.
+═══════════════════════════════════════════════════════════ */
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* ── 1. HEADER SHRINK ON SCROLL ──────────────────────────
+     Adds .is-scrolled once user scrolls past 40px.
+     CSS handles the height/shadow transition.              */
+  var header = document.querySelector('.site-header');
+  var lastY  = 0;
+
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    if(y > 40){
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+    lastY = y;
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll(); // run once on load
+
+  /* ── 2. HAMBURGER — animated X ───────────────────────────
+     Adds .is-open to .nav-toggle when menu opens.         */
+  var toggle = document.getElementById('navToggle');
+  if(toggle){
+    // Wrap the original toggleNav to also toggle class
+    var _originalToggle = window.toggleNav;
+    window.toggleNav = function(){
+      _originalToggle();
+      var isOpen = document.getElementById('navLinks').classList.contains('is-open');
+      toggle.classList.toggle('is-open', isOpen);
+    };
+  }
+
+  /* ── 3. SCROLL REVEAL ─────────────────────────────────────
+     Observes elements with .sr class. Once 15% in view,
+     adds .sr-visible. Staggered via CSS nth-child delays.  */
+  if(!reduced){
+    var srObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('sr-visible');
+          srObserver.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -32px 0px'});
+
+    // Add .sr to all revealable elements
+    var revealSelectors = [
+      '.metric',
+      '.home-block-top',
+      '.preview-grid .p-opp-card',
+      '.preview-grid .p-ev-card',
+      '.preview-grid .p-story-card',
+      '.section-hdr',
+      '.opp-card',
+      '.ev-card',
+      '.story-card',
+      '.detail-layout > *',
+      '.cta-wrap > *'
+    ];
+
+    revealSelectors.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        // Don't double-apply
+        if(!el.classList.contains('sr')){
+          el.classList.add('sr');
+          srObserver.observe(el);
+        }
+      });
+    });
+
+    // Mark grids as stagger parents
+    document.querySelectorAll('.preview-grid').forEach(function(g){
+      g.classList.add('sr-stagger');
+    });
+  } else {
+    // Skip animation — ensure all elements are visible
+    document.querySelectorAll('.sr').forEach(function(el){
+      el.classList.add('sr-visible');
+    });
+  }
+
+  /* ── 4. SEARCH — clear button & result count ─────────────
+     Adds a subtle ✕ clear button inside the search input
+     and announces result count to screen readers.         */
+  var searchEl = document.getElementById('oppSearch');
+  if(searchEl){
+    // Inject clear button
+    var clearBtn = document.createElement('button');
+    clearBtn.setAttribute('type','button');
+    clearBtn.setAttribute('aria-label','Clear search');
+    clearBtn.style.cssText = [
+      'position:absolute',
+      'right:14px',
+      'top:50%',
+      'transform:translateY(-50%)',
+      'background:none',
+      'border:none',
+      'cursor:pointer',
+      'color:var(--c-subtle)',
+      'font-size:1rem',
+      'line-height:1',
+      'padding:4px',
+      'opacity:0',
+      'transition:opacity .2s ease',
+      'display:flex',
+      'align-items:center'
+    ].join(';');
+    clearBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+    searchEl.parentNode.style.position = 'relative';
+    searchEl.parentNode.appendChild(clearBtn);
+
+    searchEl.style.paddingRight = '40px';
+
+    searchEl.addEventListener('input', function(){
+      clearBtn.style.opacity = this.value ? '1' : '0';
+    });
+    clearBtn.addEventListener('click', function(){
+      searchEl.value = '';
+      clearBtn.style.opacity = '0';
+      searchEl.focus();
+      // Trigger the existing search handler
+      if(window.searchOpp) window.searchOpp('');
+    });
+  }
+
+  /* ── 5. PILL FILTER — ripple-free visual feedback ────────
+     Adds a micro-scale pop when a pill activates.         */
+  document.querySelectorAll('.pill').forEach(function(pill){
+    pill.addEventListener('click', function(){
+      if(reduced) return;
+      this.style.transform = 'scale(.95)';
+      var self = this;
+      setTimeout(function(){ self.style.transform = ''; }, 120);
+    });
+  });
+
+  /* ── 6. CARD KEYBOARD NAV ────────────────────────────────
+     Cards have tabindex="0" — this ensures Enter/Space
+     works consistently across all card types.            */
+  // Already handled globally in the existing keyboard listener.
+
+  /* ── 7. BUTTON PRESS FEEDBACK ────────────────────────────
+     Every .btn gets an active state ripple via class toggle.
+     CSS handles the scale(.97) transform.               */
+  document.querySelectorAll('.btn').forEach(function(btn){
+    btn.addEventListener('mousedown', function(){
+      if(reduced) return;
+      this.style.transform = 'scale(.97)';
+    });
+    btn.addEventListener('mouseup mouseleave', function(){
+      this.style.transform = '';
+    });
+  });
+
+  /* ── 8. SEARCH INPUT — focus expand ─────────────────────
+     CSS handles max-width transition; this adds an ARIA
+     live region to announce result counts.               */
+  var liveRegion = document.createElement('div');
+  liveRegion.setAttribute('aria-live','polite');
+  liveRegion.setAttribute('aria-atomic','true');
+  liveRegion.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0';
+  document.body.appendChild(liveRegion);
+
+  var _origSearch = window.searchOpp;
+  window.searchOpp = function(val){
+    if(_origSearch) _origSearch(val);
+    // Count visible cards and announce
+    setTimeout(function(){
+      var visible = document.querySelectorAll('#oppGrid .opp-card:not([style*="none"])').length;
+      liveRegion.textContent = visible + ' opportunit' + (visible === 1 ? 'y' : 'ies') + ' found';
+    }, 50);
+  };
+
+  /* ── 9. HERO PANEL — re-apply SR after page switches ─────
+     When navigating back to home, re-observe HP rows.    */
+  // Handled naturally by the page show animation.
+
+  /* ── 10. SCROLL-TO-TOP on page switch ────────────────────
+     Already done in showPage. Enhanced with smooth scroll. */
+
+  /* ── 11. ACTIVE NAV UNDERLINE update ─────────────────────
+     CSS ::after pseudo-element handles the slide.
+     JS class toggling is already handled in showPage().   */
+
+})();
+
+/* ── PRELOADER CONTROLLER ───────────────────────────────────
+   Timeline:
+     0ms      — preloader visible (rendered synchronously above)
+     50ms     — logo fades + scales in
+     280ms    — wordmark clips up
+     360ms    — progress bar appears and sweeps
+     1400ms   — minimum display time elapses, page fades out
+   On window.load, whichever comes later triggers the exit.
+────────────────────────────────────────────────────────── */
+(function(){
+  var pl      = document.getElementById('preloader');
+  var logo    = pl.querySelector('.pl-logo');
+  var word    = pl.querySelector('.pl-wordmark');
+  var barWrap = pl.querySelector('.pl-bar-wrap');
+  var bar     = pl.querySelector('.pl-bar');
+
+  var MIN_DISPLAY = 1400; // ms — never hides faster than this
+  var startTime   = Date.now();
+  var pageReady   = false;
+  var timerDone   = false;
+
+  function dismiss(){
+    pl.classList.add('pl-hiding');
+    pl.addEventListener('transitionend', function handler(){
+      pl.classList.add('pl-hidden');
+      pl.removeEventListener('transitionend', handler);
+      // Show welcome modal after preloader fully exits
+      showWelcomeModal();
+    });
+  }
+
+  function tryDismiss(){
+    if(pageReady && timerDone) dismiss();
+  }
+
+  // Step 1 — Logo in
+  setTimeout(function(){ logo.classList.add('pl-in'); }, 50);
+
+  // Step 2 — Wordmark reveal
+  setTimeout(function(){ word.classList.add('pl-in'); }, 280);
+
+  // Step 3 — Progress bar
+  setTimeout(function(){
+    barWrap.classList.add('pl-in');
+    // Slight defer so browser paints the bar-wrap first
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ bar.classList.add('pl-in'); });
+    });
+  }, 360);
+
+  // Minimum display timer
+  setTimeout(function(){
+    timerDone = true;
+    tryDismiss();
+  }, MIN_DISPLAY);
+
+  // Wait for full page load
+  window.addEventListener('load', function(){
+    pageReady = true;
+    tryDismiss();
+  });
+
+  // Safety valve — never block longer than 4s on slow connections
+  setTimeout(function(){
+    pageReady = true;
+    timerDone = true;
+    tryDismiss();
+  }, 4000);
+})();
+/* ── WELCOME MODAL CONTROLLER ───────────────────────────────
+   Opens after preloader exits. Closes on:
+     - CTA click (scrolls to hero)
+     - Dismiss click
+     - × button
+     - Click outside the card
+     - ESC key
+   Focus is trapped inside while open.
+────────────────────────────────────────────────────────── */
+function showWelcomeModal(){
+  var overlay  = document.getElementById('welcome-overlay');
+  var cta      = document.getElementById('wmCta');
+  var dismiss  = document.getElementById('wmDismiss');
+  var closeBtn = document.getElementById('wmClose');
+
+  // Small delay so the page settle is visible beneath
+  setTimeout(function(){
+    overlay.removeAttribute('aria-hidden');
+    overlay.classList.add('wm-visible');
+    // Force reflow so the transition fires after display:flex is applied
+    void overlay.offsetWidth;
+    setTimeout(function(){ cta && cta.focus(); }, 420);
+  }, 220);
+
+  function hideModal(){
+    overlay.classList.remove('wm-visible');
+    overlay.classList.add('wm-hiding');
+    overlay.addEventListener('transitionend', function handler(){
+      overlay.classList.add('wm-hidden');
+      overlay.setAttribute('aria-hidden','true');
+      overlay.classList.remove('wm-hiding');
+      overlay.removeEventListener('transitionend', handler);
+    }, {once:true});
+  }
+
+  // CTA — close and scroll to hero
+  cta.addEventListener('click', function(){
+    hideModal();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  // Dismiss — just close
+  dismiss.addEventListener('click', hideModal);
+  closeBtn.addEventListener('click', hideModal);
+
+  // Click outside card to dismiss
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) hideModal();
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', function escHandler(e){
+    if(e.key === 'Escape' && overlay.classList.contains('wm-visible')){
+      hideModal();
+      document.removeEventListener('keydown', escHandler);
+    }
+  });
+
+  // Focus trap — keep Tab inside the modal while open
+  var focusable = overlay.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  var first = focusable[0];
+  var last  = focusable[focusable.length - 1];
+  overlay.addEventListener('keydown', function(e){
+    if(e.key !== 'Tab') return;
+    if(e.shiftKey){
+      if(document.activeElement === first){ e.preventDefault(); last.focus(); }
+    } else {
+      if(document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+}
+</script>
+</body>
+</html>
