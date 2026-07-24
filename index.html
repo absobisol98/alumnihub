@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>ATLAS Hub</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -1179,11 +1181,9 @@ footer{background:rgba(245,245,243,.96);border-top:1px solid var(--c-border-2);p
         </div>
         <div class="preview-grid" role="list">
           <article class="p-opp-card" role="listitem" tabindex="0" onclick="openOpp('schwarzman')" aria-label="Schwarzman Scholars">
-            <div class="p-thumb"><img src="Schwarzman.png" alt="" loading="lazy"/><div class="p-thumb-ov"></div><span class="p-chip">Scholarship</span></div>
+            <div class="p-thumb"><img src="Schwarzman.jpg" alt="" loading="lazy"/><div class="p-thumb-ov"></div><span class="p-chip">Scholarship</span></div>
             <div class="p-opp-body"><p class="p-opp-title">Schwarzman Scholars</p><p class="p-opp-org">Tsinghua University · Beijing</p></div>
           </article>
-          
-          
         </div>
       </div>
 
@@ -1205,7 +1205,6 @@ footer{background:rgba(245,245,243,.96);border-top:1px solid var(--c-border-2);p
             <p class="p-ev-desc">Practitioner-led session on leading through ambiguity and change.</p>
             <div class="p-chips"><span class="p-chip-sm chip-online">Online</span><span class="p-chip-sm chip-type">Masterclass</span></div>
           </article>
-          
         </div>
       </div>
 
@@ -1276,7 +1275,7 @@ footer{background:rgba(245,245,243,.96);border-top:1px solid var(--c-border-2);p
         <div class="card-grid" id="oppGrid" role="list">
 
           <article class="opp-card" data-cat="scholarship" data-search="schwarzman scholars tsinghua university beijing scholarship" onclick="openOpp('schwarzman')" role="listitem" tabindex="0" aria-label="Schwarzman Scholars">
-            <div class="opp-thumb" aria-hidden="true"><img src="Schwarzman.png" alt="" loading="lazy"/><div class="opp-thumb-ov"></div><span class="opp-chip">Scholarships</span></div>
+            <div class="opp-thumb" aria-hidden="true"><img src="Schwarzman.jpg" alt="" loading="lazy"/><div class="opp-thumb-ov"></div><span class="opp-chip">Scholarships</span></div>
             <div class="opp-body">
               <p class="opp-title">Schwarzman Scholars</p>
               <p class="opp-org">Tsinghua University · Beijing, China</p>
@@ -1294,14 +1293,6 @@ footer{background:rgba(245,245,243,.96);border-top:1px solid var(--c-border-2);p
             </div>
             <div class="opp-foot"><span class="opp-deadline">Deadline: Mar 15, 2026</span><span class="opp-more">View <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
           </article>
-
-          
-
-          
-
-          
-
-          
 
         </div>
       </div>
@@ -1463,7 +1454,7 @@ footer{background:rgba(245,245,243,.96);border-top:1px solid var(--c-border-2);p
 
 <script>
 var OPPS={
-  schwarzman:{title:'Schwarzman Scholars',org:'Tsinghua University \u00b7 Beijing, China',type:'Scholarships',deadline:'September 9, 2026',duration:'One academic year (12 months)',location:'Beijing, China',funding:'Fully funded \u2014 tuition, room, board, flights, stipend',applyUrl:'https://www.schwarzmanscholars.org/admissions/',tags:['Global Leadership','Fully Funded','Postgraduate'],heroImg:'Schwarzman.png',gallery:['https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=75&auto=format&fit=crop'],body:'<p>Schwarzman Scholars is a fully-funded, one-year master\u2019s degree and leadership program at Tsinghua University in Beijing, China. At the heart of the program are world-renowned advisers, a rigorous and innovative study of global affairs, and hands-on exploration of Chinese culture and commerce.</p><p>The program develops the next generation of global leaders who will build trust and understanding between China and the rest of the world. Fellows are selected based on leadership potential, academic distinction, and the capacity to serve as a bridge between cultures and institutions.</p>'},
+  schwarzman:{title:'Schwarzman Scholars',org:'Tsinghua University \u00b7 Beijing, China',type:'Scholarships',deadline:'September 9, 2026',duration:'One academic year (12 months)',location:'Beijing, China',funding:'Fully funded \u2014 tuition, room, board, flights, stipend',applyUrl:'https://www.schwarzmanscholars.org/admissions/',tags:['Global Leadership','Fully Funded','Postgraduate'],heroImg:'Schwarzman.jpg',gallery:['https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=75&auto=format&fit=crop'],body:'<p>Schwarzman Scholars is a fully-funded, one-year master\u2019s degree and leadership program at Tsinghua University in Beijing, China. At the heart of the program are world-renowned advisers, a rigorous and innovative study of global affairs, and hands-on exploration of Chinese culture and commerce.</p><p>The program develops the next generation of global leaders who will build trust and understanding between China and the rest of the world. Fellows are selected based on leadership potential, academic distinction, and the capacity to serve as a bridge between cultures and institutions.</p>'},
   adenauer:{title:'Adenauer Young Leaders Program',org:'Konrad Adenauer Stiftung',type:'Fellowships',deadline:'March 15, 2026',duration:'10-month structured program',location:'Germany and Southeast Asia',funding:'Fully covered \u2014 travel, accommodation, and program costs',applyUrl:'https://www.kas.de',tags:['Southeast Asia','Governance','Civil Society'],heroImg:'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=75&auto=format&fit=crop'],body:'<p>The Adenauer Young Leaders Program is a structured fellowship for emerging public leaders in Southeast Asia. Organized by the Konrad Adenauer Stiftung, the program brings together 25\u201330 participants for a rigorous, 10-month journey spanning workshops, study tours, and mentorship sessions.</p><p>Participants engage with senior practitioners in governance, civil society, and private sector leadership, with particular focus on democratic governance, rule of law, and sustainable development within the ASEAN context.</p>'},
   obama:{title:'Obama Foundation Fellowship',org:'Obama Foundation',type:'Fellowships',deadline:'January 31, 2026',duration:'Two-year fellowship',location:'Chicago, USA and home community',funding:'Stipend, travel, and project support provided',applyUrl:'https://www.obama.org/fellowship/',tags:['Civic Leadership','Community Change','Asia-Pacific'],heroImg:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=75&auto=format&fit=crop'],body:'<p>The Obama Foundation Fellowship is a two-year civic leadership program supporting outstanding emerging leaders working to create change in their communities. Fellows are selected based on a track record of community impact, personal character, and the potential to scale their work.</p><p>The program includes convenings in Chicago and internationally, one-on-one coaching, access to the broader Obama Foundation network, and a community project grant to support ongoing work.</p>'},
   asia:{title:'Asia Foundation Development Grant',org:'The Asia Foundation',type:'Grants',deadline:'Rolling \u2014 reviewed quarterly',duration:'Project-based, 6\u201318 months',location:'Philippines and Asia-Pacific',funding:'Project grant \u2014 amount varies by scope',applyUrl:'https://asiafoundation.org',tags:['Community Development','Governance','Education'],heroImg:'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80&auto=format&fit=crop',gallery:['https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=600&q=75&auto=format&fit=crop'],body:'<p>The Asia Foundation Development Grant supports alumni-led projects addressing governance, education, livelihoods, and social development across the Philippines and broader Asia-Pacific region. Applications are reviewed quarterly by a panel of program officers and independent advisers.</p><p>Priority is given to projects with demonstrated community partnerships, a clear theory of change, and a realistic plan for sustainability beyond the grant period.</p>'},
@@ -1501,6 +1492,29 @@ var CAL_EVS=[
 
 var PAGES=['home','opportunities','events','stories'];
 var calY=2025,calM=5,activeOppUrl='#';
+
+/* Safe rich-text setter: allows only a small tag allowlist (p, strong, em, b, i, br)
+   and strips all attributes/scripts/event handlers, so this stays safe even if the
+   OPPS/STORIES data objects are ever populated from a form or CMS instead of
+   hardcoded here. */
+var RICH_TEXT_TAGS={P:1,STRONG:1,EM:1,B:1,I:1,BR:1};
+function setSafeHTML(el,html){
+  el.textContent='';
+  var doc=new DOMParser().parseFromString('<div>'+html+'</div>','text/html');
+  var src=doc.body.firstChild;
+  if(!src)return;
+  (function copy(srcNode,destNode){
+    srcNode.childNodes.forEach(function(node){
+      if(node.nodeType===Node.TEXT_NODE){
+        destNode.appendChild(document.createTextNode(node.textContent));
+      } else if(node.nodeType===Node.ELEMENT_NODE&&RICH_TEXT_TAGS[node.tagName]){
+        var clean=document.createElement(node.tagName);
+        copy(node,clean);
+        destNode.appendChild(clean);
+      }
+    });
+  })(src,el);
+}
 
 /* PAGE NAV */
 function showPage(id){
@@ -1555,13 +1569,28 @@ function openOpp(id){
   document.getElementById('d-chip').textContent=d.type;
   document.getElementById('d-title').textContent=d.title;
   document.getElementById('d-org').textContent=d.org;
-  document.getElementById('d-body').innerHTML=d.body;
+  setSafeHTML(document.getElementById('d-body'),d.body);
   document.getElementById('d-deadline').textContent=d.deadline;
   document.getElementById('d-duration').textContent=d.duration;
   document.getElementById('d-location').textContent=d.location;
   document.getElementById('d-funding').textContent=d.funding;
-  document.getElementById('d-tags').innerHTML=d.tags.map(function(t){return'<span class="info-tag">'+t+'</span>';}).join('');
-  document.getElementById('d-gallery').innerHTML=d.gallery.map(function(s){return'<img src="'+s+'" alt="" loading="lazy"/>';}).join('');
+  var dTags=document.getElementById('d-tags');
+  dTags.textContent='';
+  d.tags.forEach(function(t){
+    var span=document.createElement('span');
+    span.className='info-tag';
+    span.textContent=t;
+    dTags.appendChild(span);
+  });
+  var dGallery=document.getElementById('d-gallery');
+  dGallery.textContent='';
+  d.gallery.forEach(function(s){
+    var img=document.createElement('img');
+    img.src=s;
+    img.alt=d.title+' — gallery photo';
+    img.loading='lazy';
+    dGallery.appendChild(img);
+  });
   activeOppUrl=d.applyUrl||'#';
   document.getElementById('opp-list').hidden=true;
   document.getElementById('opp-detail').classList.add('is-active');
@@ -1611,18 +1640,43 @@ function openModal(evId){
   document.getElementById('modalDesc').textContent=d.desc;
   var locSvg='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 7.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="1.2"/><path d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.2"/></svg>';
   var fmtSvg='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="1" y1="5.5" x2="13" y2="5.5" stroke="currentColor" stroke-width="1.2"/></svg>';
-  document.getElementById('modalMeta').innerHTML=
-    '<div class="modal-meta-row">'+locSvg+'<span><strong>Location:</strong> '+d.location+'</span></div>'+
-    '<div class="modal-meta-row">'+fmtSvg+'<span><strong>Format:</strong> '+d.format+'</span></div>';
+  function metaRow(iconSvg,label,value){
+    var row=document.createElement('div');
+    row.className='modal-meta-row';
+    var iconWrap=document.createElement('span');
+    iconWrap.innerHTML=iconSvg; // fixed, hardcoded markup \u2014 not data-derived
+    row.appendChild(iconWrap.firstChild);
+    var textSpan=document.createElement('span');
+    var strong=document.createElement('strong');
+    strong.textContent=label+':';
+    textSpan.appendChild(strong);
+    textSpan.appendChild(document.createTextNode(' '+value));
+    row.appendChild(textSpan);
+    return row;
+  }
+  var modalMeta=document.getElementById('modalMeta');
+  modalMeta.textContent='';
+  modalMeta.appendChild(metaRow(locSvg,'Location',d.location));
+  modalMeta.appendChild(metaRow(fmtSvg,'Format',d.format));
   var chipMap={'In-Person':'chip-inperson','Online':'chip-online','Also Online':'chip-online'};
-  document.getElementById('modalChips').innerHTML=d.chips.map(function(c){
-    return'<span class="ev-chip '+(chipMap[c]||'chip-type')+'">'+c+'</span>';
-  }).join('');
-  // Set Visit Link href from event data
+  var modalChips=document.getElementById('modalChips');
+  modalChips.textContent='';
+  d.chips.forEach(function(c){
+    var chip=document.createElement('span');
+    chip.className='ev-chip '+(chipMap[c]||'chip-type');
+    chip.textContent=c;
+    modalChips.appendChild(chip);
+  });
+  // Set Visit Link href from event data \u2014 hide it entirely when there's no real URL
   var visitLink=document.getElementById('modalVisitLink');
-  visitLink.href=d.url||'#';
-  visitLink.setAttribute('aria-label','Visit '+d.title+' page \u2014 opens in new tab');
+  var hasRealUrl=!!d.url&&d.url!=='#';
+  visitLink.style.display=hasRealUrl?'':'none';
+  if(hasRealUrl){
+    visitLink.href=d.url;
+    visitLink.setAttribute('aria-label','Visit '+d.title+' page \u2014 opens in new tab');
+  }
   var modal=document.getElementById('evModal');
+  evModalTrigger=document.activeElement;
   modal.classList.add('is-open');
   modal.removeAttribute('aria-hidden');
   document.body.style.overflow='hidden';
@@ -1633,9 +1687,25 @@ function closeModal(){
   modal.classList.remove('is-open');
   modal.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
+  if(evModalTrigger&&typeof evModalTrigger.focus==='function')evModalTrigger.focus();
+  evModalTrigger=null;
 }
+var evModalTrigger=null;
 document.getElementById('evModal').addEventListener('click',function(e){
   if(e.target===this)closeModal();
+});
+document.getElementById('evModal').addEventListener('keydown',function(e){
+  var modal=this;
+  if(!modal.classList.contains('is-open'))return;
+  if(e.key!=='Tab')return;
+  var focusable=modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if(!focusable.length)return;
+  var first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey){
+    if(document.activeElement===first){e.preventDefault();last.focus();}
+  } else {
+    if(document.activeElement===last){e.preventDefault();first.focus();}
+  }
 });
 
 /* STORIES */
@@ -1663,8 +1733,22 @@ function openStory(id){
   document.getElementById('s-headline').textContent=d.headline;
   document.getElementById('s-name').textContent=d.name+' · '+d.role;
   document.getElementById('s-role').textContent='';
-  document.getElementById('s-body').innerHTML=d.body;
-  document.getElementById('s-stats').innerHTML=d.stats.map(function(s){return'<div class="stat-item"><p class="stat-val">'+s.v+'</p><p class="stat-label">'+s.l+'</p></div>';}).join('');
+  setSafeHTML(document.getElementById('s-body'),d.body);
+  var sStats=document.getElementById('s-stats');
+  sStats.textContent='';
+  d.stats.forEach(function(s){
+    var item=document.createElement('div');
+    item.className='stat-item';
+    var val=document.createElement('p');
+    val.className='stat-val';
+    val.textContent=s.v;
+    var label=document.createElement('p');
+    label.className='stat-label';
+    label.textContent=s.l;
+    item.appendChild(val);
+    item.appendChild(label);
+    sStats.appendChild(item);
+  });
   document.getElementById('story-list').hidden=true;
   document.getElementById('story-detail').classList.add('is-active');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -1701,21 +1785,42 @@ function renderCal(){
   var dim=new Date(calY,calM+1,0).getDate();
   var prev=new Date(calY,calM,0).getDate();
   var today=new Date();
-  var html='';
-  for(var i=first-1;i>=0;i--){html+='<div class="cal-cell dim"><p class="cal-num">'+(prev-i)+'</p></div>';}
+  var grid=document.getElementById('calGrid');
+  grid.textContent='';
+  function dimCell(num){
+    var cell=document.createElement('div');
+    cell.className='cal-cell dim';
+    var p=document.createElement('p');
+    p.className='cal-num';
+    p.textContent=num;
+    cell.appendChild(p);
+    return cell;
+  }
+  for(var i=first-1;i>=0;i--){grid.appendChild(dimCell(prev-i));}
   for(var d=1;d<=dim;d++){
     var isToday=today.getFullYear()===calY&&today.getMonth()===calM&&today.getDate()===d;
     var evs=CAL_EVS.filter(function(e){return e.m===calM&&e.d===d});
-    var cls='cal-cell'+(isToday?' today':'')+(evs.length?' has-ev':'');
-    html+='<div class="'+cls+'"><p class="cal-num">'+d+'</p>';
+    var cell=document.createElement('div');
+    cell.className='cal-cell'+(isToday?' today':'')+(evs.length?' has-ev':'');
+    var num=document.createElement('p');
+    num.className='cal-num';
+    num.textContent=d;
+    cell.appendChild(num);
     evs.forEach(function(e){
-      html+='<button class="cal-ev-btn'+(e.blue?' is-blue':'')+'" onclick="openModal(\''+e.evId+'\')" aria-label="View '+e.t+' details">'+e.t+'</button>';
+      var btn=document.createElement('button');
+      btn.type='button';
+      btn.className='cal-ev-btn'+(e.blue?' is-blue':'');
+      btn.textContent=e.t;
+      btn.setAttribute('aria-label','View '+e.t+' details');
+      btn.addEventListener('click',function(evId){
+        return function(){openModal(evId);};
+      }(e.evId));
+      cell.appendChild(btn);
     });
-    html+='</div>';
+    grid.appendChild(cell);
   }
   var total=Math.ceil((first+dim)/7)*7;
-  for(var n=1;n<=total-(first+dim);n++){html+='<div class="cal-cell dim"><p class="cal-num">'+n+'</p></div>';}
-  document.getElementById('calGrid').innerHTML=html;
+  for(var n=1;n<=total-(first+dim);n++){grid.appendChild(dimCell(n));}
 }
 
 /* KEYBOARD */
